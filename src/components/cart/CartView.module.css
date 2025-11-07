@@ -1,0 +1,63 @@
+.item {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--secondary-color);
+}
+
+.imageWrapper {
+  flex-shrink: 0; /* Evita que la imagen se encoja */
+}
+
+.image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--secondary-color);
+}
+
+.itemInfo {
+  flex-grow: 1; /* Ocupa el espacio disponible */
+}
+
+.name {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.price {
+  font-size: 1rem;
+  margin-bottom: 0.75rem; /* O dale un poco más de espacio */
+}
+
+.quantity {
+  font-size: 0.875rem;
+  color: #555;
+}
+
+.itemActions {
+  display: flex;
+  align-items: flex-start;
+}
+
+.removeButton {
+  background: none;
+  border: none;
+  color: #d93025;
+  font-size: 0.875rem;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.removeButton:disabled {
+  color: #999;
+}
+
+/* Modo oscuro */
+@media (prefers-color-scheme: dark) {
+  .quantity {
+    color: #999;
+  }
+}

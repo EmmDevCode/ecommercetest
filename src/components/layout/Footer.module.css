@@ -1,0 +1,19 @@
+.footer {
+  width: 100%;
+  padding: 2rem 0;
+  margin-top: 4rem; /* Empuja el footer lejos del contenido */
+  background-color: var(--secondary-color);
+  border-top: 1px solid #ddd;
+  text-align: center;
+  font-size: 0.875rem;
+  
+  /* Ajuste para dark mode */
+  @media (prefers-color-scheme: dark) {
+    background-color: #111;
+    border-top: 1px solid #333;
+  }
+}
+
+.footer p {
+  margin: 0.25rem 0;
+}

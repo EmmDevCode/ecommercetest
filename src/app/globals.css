@@ -1,13 +1,36 @@
+/*
+ * src/app/globals.css
+ * Tu archivo principal de CSS puro.
+*/
+
+/* 1. Variables CSS (La mejor práctica para los colores) */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+  
+  /* Colores de tu marca (ejemplo) */
+  --primary-color: #0070f3;
+  --secondary-color: #eaeaea;
 }
 
+/* 2. (Opcional) Variables para Dark Mode */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+    
+    --primary-color: #0070f3; /* Ajusta si es necesario */
+    --secondary-color: #333;
   }
+}
+
+/* 3. Reseteo Básico (Estilo "CSS puro") */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 html,
@@ -16,18 +39,15 @@ body {
   overflow-x: hidden;
 }
 
+/* 4. Estilos globales del Body */
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
 }
 
 a {
@@ -35,8 +55,10 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+/* 5. Clases de utilidad globales (si lo deseas) */
+.container {
+  width: 100%;
+  max-width: 1200px; /* Ancho máximo de tu e-commerce */
+  margin: 0 auto;
+  padding: 0 1rem;
 }

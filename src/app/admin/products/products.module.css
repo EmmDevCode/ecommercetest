@@ -1,0 +1,66 @@
+.page {
+  padding: 2rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.page h1 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.button {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  border: none;
+}
+
+.productsTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.productsTable th,
+.productsTable td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--secondary-color);
+  vertical-align: middle;
+}
+
+.productsTable th {
+  background-color: var(--secondary-color);
+}
+
+.productImage {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+/* Modo Oscuro */
+@media (prefers-color-scheme: dark) {
+  .productsTable th {
+    background-color: #333;
+    border-bottom: 1px solid #444;
+  }
+  .productsTable td {
+    border-bottom: 1px solid #444;
+  }
+  .productImage {
+    border-color: #444;
+  }
+}

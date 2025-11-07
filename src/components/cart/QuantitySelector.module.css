@@ -1,0 +1,42 @@
+.selector {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--secondary-color);
+  border-radius: 4px;
+  width: fit-content;
+}
+
+.button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--foreground-rgb);
+}
+
+.button:disabled {
+  color: #999;
+  cursor: not-allowed;
+}
+
+.quantity {
+  padding: 0 0.5rem;
+  font-weight: 600;
+  min-width: 30px; /* Ancho mínimo para que no salte */
+  text-align: center;
+}
+
+/* Modo oscuro */
+@media (prefers-color-scheme: dark) {
+  .selector {
+    border-color: #444;
+  }
+  .button {
+    color: var(--foreground-rgb);
+  }
+  .button:disabled {
+    color: #666;
+  }
+}

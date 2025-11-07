@@ -1,0 +1,68 @@
+.page {
+  padding: 2rem;
+}
+
+.page h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+
+.ordersTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.ordersTable th,
+.ordersTable td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--secondary-color);
+}
+
+.ordersTable th {
+  background-color: var(--secondary-color);
+}
+
+.orderId {
+  font-family: monospace;
+  font-size: 0.875rem;
+}
+
+.status {
+  padding: 0.25rem 0.75rem;
+  border-radius: 99px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-transform: capitalize;
+}
+
+/* Estilos para los estados */
+.status.pending { background-color: #fef3c7; color: #92400e; }
+.status.paid { background-color: #d1fae5; color: #065f46; }
+.status.processing { background-color: #dbeafe; color: #1e40af; }
+.status.shipped { background-color: #e0e7ff; color: #3730a3; }
+.status.in_transit { background-color: #e5e7eb; color: #1f2937; }
+.status.out_for_delivery { background-color: #fef9c3; color: #713f12; }
+.status.delivered { background-color: #c6f6d5; color: #22543d; }
+.status.cancelled { background-color: #fee2e2; color: #991b1b; }
+
+/* Modo Oscuro */
+@media (prefers-color-scheme: dark) {
+  .ordersTable th {
+    background-color: #333;
+    border-bottom: 1px solid #444;
+  }
+  .ordersTable td {
+    border-bottom: 1px solid #444;
+  }
+  
+  .status.pending { background-color: #4a3a14; color: #fde68a; }
+  .status.paid { background-color: #10402b; color: #a7f3d0; }
+  .status.processing { background-color: #1e3a8a; color: #bfdbfe; }
+  .status.shipped { background-color: #312e81; color: #c7d2fe; }
+  .status.in_transit { background-color: #374151; color: #d1d5db; }
+  .status.out_for_delivery { background-color: #4a3a14; color: #fef08a; }
+  .status.delivered { background-color: #164e32; color: #bbf7d0; }
+  .status.cancelled { background-color: #5b1b1b; color: #fecaca; }
+}
