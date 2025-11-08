@@ -1,7 +1,8 @@
+/* src/components/products/ProductCard.module.css */
 .card {
   border: 1px solid var(--secondary-color);
   border-radius: 8px;
-  overflow: hidden; /* Para que la imagen no se salga */
+  overflow: hidden;
   text-decoration: none;
   color: inherit;
   background-color: var(--background-end-rgb);
@@ -17,76 +18,57 @@
 
 .imageWrapper {
   width: 100%;
-  /* Mantiene la proporción de la imagen (aspect-ratio) */
   aspect-ratio: 4 / 3; 
-  background-color: #f0f0f0; /* Color mientras carga la imagen */
+  background-color: #f0f0f0;
 }
 
 .image {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Asegura que la imagen cubra el espacio */
+  object-fit: cover;
 }
 
 .info {
   padding: 1rem;
-  flex-grow: 1; /* Para que todos los 'info' tengan la misma altura */
+  flex-grow: 1; 
   display: flex;
   flex-direction: column;
 }
 
+/* --- ¡NUEVO! Estilo para la categoría --- */
+.category {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #777;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+
 .name {
-  font-size: 1.125rem;
+  font-size: 1rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
-  flex-grow: 1;
+  flex-grow: 1; /* Esto empuja el precio hacia abajo */
 }
 
 .price {
-  font-size: 1.25rem;
+  font-size: 1.125rem;
   font-weight: 700;
   color: var(--primary-color);
 }
 
-/* Nuevo: Wrapper para el link (imagen e info) */
+/* --- ESTILOS ANTIGUOS (Limpieza) --- */
+/* Ya no necesitamos un wrapper de link ni de botón */
 .linkWrapper {
-  text-decoration: none;
-  color: inherit;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1; /* Ocupa el espacio disponible */
+  /* ... (puedes borrar esto si ya no lo usas) ... */
 }
-
-/* Nuevo: Wrapper para el botón */
 .buttonWrapper {
-  padding: 0 1rem 1rem 1rem; /* Padding solo en el wrapper del botón */
+  padding: 0;
 }
-
-/* Ajusta el padding de 'info' para que no sea doble */
 .info {
   padding: 1rem;
-  padding-bottom: 0.5rem; /* Reducimos el padding de abajo */
   flex-grow: 1;
   display: flex;
   flex-direction: column;
 }
 
-/* Hacemos que el hover esté en la 'card' y no en el 'link' */
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}
-
-/* Modo oscuro */
-@media (prefers-color-scheme: dark) {
-  .card {
-    border-color: #333;
-    background-color: #1a1a1a;
-  }
-  .card:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  }
-  .imageWrapper {
-    background-color: #2a2a2a;
-  }
-}

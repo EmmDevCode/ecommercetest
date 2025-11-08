@@ -28,15 +28,3 @@
   text-align: center;
 }
 
-/* Modo oscuro */
-@media (prefers-color-scheme: dark) {
-  .selector {
-    border-color: #444;
-  }
-  .button {
-    color: var(--foreground-rgb);
-  }
-  .button:disabled {
-    color: #666;
-  }
-}

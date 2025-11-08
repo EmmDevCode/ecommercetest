@@ -7,11 +7,7 @@
   text-align: center;
   font-size: 0.875rem;
   
-  /* Ajuste para dark mode */
-  @media (prefers-color-scheme: dark) {
-    background-color: #111;
-    border-top: 1px solid #333;
-  }
+  
 }
 
 .footer p {

@@ -44,12 +44,3 @@
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  .page p {
-    color: #999;
-  }
-  .formColumn h2,
-  .listColumn h2 {
-    border-bottom-color: #333;
-  }
-}

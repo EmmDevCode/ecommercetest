@@ -47,22 +47,3 @@
 .status.delivered { background-color: #c6f6d5; color: #22543d; }
 .status.cancelled { background-color: #fee2e2; color: #991b1b; }
 
-/* Modo Oscuro */
-@media (prefers-color-scheme: dark) {
-  .ordersTable th {
-    background-color: #333;
-    border-bottom: 1px solid #444;
-  }
-  .ordersTable td {
-    border-bottom: 1px solid #444;
-  }
-  
-  .status.pending { background-color: #4a3a14; color: #fde68a; }
-  .status.paid { background-color: #10402b; color: #a7f3d0; }
-  .status.processing { background-color: #1e3a8a; color: #bfdbfe; }
-  .status.shipped { background-color: #312e81; color: #c7d2fe; }
-  .status.in_transit { background-color: #374151; color: #d1d5db; }
-  .status.out_for_delivery { background-color: #4a3a14; color: #fef08a; }
-  .status.delivered { background-color: #164e32; color: #bbf7d0; }
-  .status.cancelled { background-color: #5b1b1b; color: #fecaca; }
-}

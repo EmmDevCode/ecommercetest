@@ -1,0 +1,43 @@
+/* src/components/home/ProductCarousel.module.css */
+.carouselContainer {
+  /* Esconde los items que se salen */
+  overflow: hidden;
+  width: 100%;
+  cursor: grab;
+}
+.carouselContainer:active {
+  cursor: grabbing;
+}
+
+.carouselTrack {
+  /* El track es un flexbox */
+  display: flex;
+  gap: 1.5rem; /* Mismo gap que tu .grid */
+  /* Añadimos padding para que se vea alineado con el grid */
+  padding: 0.5rem;
+}
+
+.item {
+  /* Cada item tiene un ancho fijo */
+  flex: 0 0 auto;
+  /* 4 columnas en desktop (100% / 4 = 25% - ajuste por gap) */
+  /* Ajusta el 'calc' si tu gap es diferente */
+  width: calc(25% - 1.125rem);
+  min-width: 250px; /* Ancho mínimo */
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .item {
+    /* 2 columnas en tablet */
+    width: calc(50% - 0.75rem);
+  }
+}
+
+@media (max-width: 600px) {
+  .item {
+    /* 1.x columnas en móvil */
+    width: 80%;
+    min-width: 280px;
+  }
+}

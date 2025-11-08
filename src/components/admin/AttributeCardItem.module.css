@@ -81,14 +81,3 @@
 }
 .deleteOptionButton:disabled { opacity: 0.5; }
 
-/* --- Dark Mode --- */
-@media (prefers-color-scheme: dark) {
-  .attributeCard { background-color: #222; }
-  .headerForm, .optionsGrid { border-top-color: #444; }
-  .input { background-color: #333; border-color: #555; color: #eee; }
-  .buttonEdit { background-color: #312e81; color: #c7d2fe; }
-  .buttonSave { background-color: #10402b; color: #a7f3d0; }
-  .buttonDelete { background-color: #5b1b1b; color: #fecaca; }
-  .optionTag { background-color: #333; border-color: #444; }
-  .deleteOptionButton { background-color: #444; }
-}

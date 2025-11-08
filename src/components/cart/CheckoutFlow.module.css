@@ -40,13 +40,3 @@
   */
 }
 
-/* Modo oscuro */
-@media (prefers-color-scheme: dark) {
-  .select {
-    background-color: #1a1a1a;
-    border-color: #333;
-  }
-  .noAddress {
-    background-color: #222;
-  }
-}

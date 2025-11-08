@@ -1,0 +1,31 @@
+/* src/components/home/Typewriter.module.css */
+.wrapper {
+  font-size: 2.5rem;
+  font-weight: 700;
+  font-family: monospace; /* Queda bien con el efecto */
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.letter {
+  display: inline-block;
+}
+
+.caret {
+  display: inline-block;
+  width: 2px;
+  height: 2.5rem; /* Ajusta al tamaño de la fuente */
+  background-color: var(--foreground-rgb);
+  margin-left: 8px;
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    font-size: 1.75rem;
+    justify-content: center;
+    text-align: center;
+  }
+  .caret {
+    height: 1.75rem;
+  }
+}

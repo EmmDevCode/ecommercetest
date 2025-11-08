@@ -43,10 +43,3 @@
 
 .buttonDelete:disabled { opacity: 0.5; }
 
-@media (prefers-color-scheme: dark) {
-  .item { background-color: #222; }
-  .input { background-color: #333; border-color: #555; color: #eee; }
-  .buttonEdit { background-color: #312e81; color: #c7d2fe; }
-  .buttonSave { background-color: #10402b; color: #a7f3d0; }
-  .buttonDelete { background-color: #5b1b1b; color: #fecaca; }
-}

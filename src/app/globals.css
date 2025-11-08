@@ -3,6 +3,9 @@
  * Tu archivo principal de CSS puro.
 */
 
+/* En styles/globals.css o similar */
+
+
 /* 1. Variables CSS (La mejor práctica para los colores) */
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -14,17 +17,6 @@
   --secondary-color: #eaeaea;
 }
 
-/* 2. (Opcional) Variables para Dark Mode */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-    
-    --primary-color: #0070f3; /* Ajusta si es necesario */
-    --secondary-color: #333;
-  }
-}
 
 /* 3. Reseteo Básico (Estilo "CSS puro") */
 * {
@@ -45,9 +37,12 @@ body {
   background: linear-gradient(
       to bottom,
       transparent,
-      rgb(var(--background-end-rgb))
+      rgb(255, 255, 255)  /* ← Fuerza blanco */
     )
-    rgb(var(--background-start-rgb));
+    rgb(255, 255, 255);    /* ← Fuerza blanco */
+  
+  /* Anula el modo oscuro del sistema */
+  color-scheme: light only;
 }
 
 a {

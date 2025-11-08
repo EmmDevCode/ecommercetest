@@ -259,26 +259,3 @@
   }
 }
 
-/* Modo oscuro */
-@media (prefers-color-scheme: dark) {
-  .stepIcon {
-    background: #374151;
-    border-color: #4b5563;
-  }
-  
-  .stepLabel {
-    color: #9ca3af;
-  }
-  
-  .step:not(:last-child)::after {
-    background: linear-gradient(90deg, #4b5563 0%, #4b5563 100%);
-  }
-  
-  .step.completed .stepLabel {
-    color: #f9fafb;
-  }
-  
-  .step.current .stepLabel {
-    color: #f9fafb;
-  }
-}

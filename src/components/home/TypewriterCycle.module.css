@@ -1,0 +1,21 @@
+/* src/components/home/TypewriterCycle.module.css */
+.wrapper {
+  font-size: 2.5rem;
+  font-weight: 700;
+  display: flex;
+  /* Asegura que el espacio " " se mantenga */
+  white-space: pre; 
+}
+
+.word {
+  display: inline-block;
+  color: var(--primary-color); /* Color para la palabra que cambia */
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    font-size: 1.75rem;
+    justify-content: center;
+    text-align: center;
+  }
+}

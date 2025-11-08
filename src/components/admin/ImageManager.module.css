@@ -73,15 +73,3 @@
   background-color: #ccc;
 }
 
-@media (prefers-color-scheme: dark) {
-  .manager {
-    background-color: #222;
-    border-color: #444;
-  }
-  .formTitle {
-    border-top-color: #444;
-  }
-  .imageCard {
-    border-color: #444;
-  }
-}

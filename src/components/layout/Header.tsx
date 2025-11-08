@@ -1,102 +1,100 @@
+// src/components/layout/Header.tsx
 import Link from 'next/link';
 import styles from './Header.module.css';
-import { createClient } from '@/lib/supabase/server'; // Cliente de SERVIDOR
-// ⚠️ ELIMINA esta línea - ya no necesitas cookies
-// import { cookies } from 'next/headers';
+import { createClient } from '@/lib/supabase/server';
 import { SignOutButton } from '@/components/auth/SignOutButton';
+import { NavDropdown } from './NavDropdown'; // <-- Importa el nuevo componente
 
 /**
  * El Header principal del sitio.
  * ¡Ahora es un Server Component!
  */
 export const Header = async () => {
-  // ⚠️ ELIMINA esta línea
-  // const cookieStore = cookies();
-  
-  // ⚠️ ACTUALIZA: usa await con createClient()
   const supabase = await createClient();
 
   // 1. Obtenemos el usuario actual
   const { data: { user } } = await supabase.auth.getUser();
 
-  // 2. (Opcional pero recomendado) Obtenemos el perfil para saber si es admin
-  let userRole = 'user'; // Por defecto
+  // 2. Obtenemos el perfil (para saber si es admin)
+  let userRole = 'user';
   if (user) {
     const { data: profile } = await supabase
       .from('profiles')
       .select('role')
       .eq('id', user.id)
       .single();
-    
-    if (profile) {
-      userRole = profile.role;
-    }
+    if (profile) userRole = profile.role;
   }
+  
+  // 3. ¡NUEVO! Cargamos las categorías en el servidor
+  const { data: categories } = await supabase
+    .from('categories')
+    .select('name, slug')
+    .order('name', { ascending: true });
 
   return (
     <header className={styles.header}>
+      {/* 4. Este es el 'wrapper' que tendrá el estilo Glassmorfismo */}
       <div className={`${styles.wrapper} container`}>
         
-        <Link href="/" className={styles.logo}>
-          Mi E-Commerce
-        </Link>
-
-        {/* --- NAVEGACIÓN PRINCIPAL --- */}
+        {/* --- NAVEGACIÓN (Izquierda) --- */}
         <nav className={styles.nav}>
-          <ul>
-            <li>
-              <Link href="/">Inicio</Link>
-            </li>
-            <li>
-              <Link href="/productos">Productos</Link>
-            </li>
-            {/* 3. Mostramos "Admin" solo si el rol es 'admin' */}
-            {userRole === 'admin' && (
-              <li>
-                <Link href="/admin/products/new">Admin</Link>
-              </li>
-            )}
-          </ul>
+          {/* 5. Reemplazamos el Link por el Dropdown */}
+          <NavDropdown title="productos" categories={categories || []} />
+          <Link href="/reseñas" className={styles.navLink}>
+            Reseñas
+          </Link>
+          <Link href="/sobre-nosotros" className={styles.navLink}>
+            Sobre nosotros
+          </Link>
         </nav>
 
-        {/* --- ACCIONES DE USUARIO --- */}
+        {/* --- LOGO (Centro) --- */}
+        <Link href="/" className={styles.logo}>
+          LOGO
+        </Link>
+
+        {/* --- ACCIONES (Derecha) --- */}
         <div className={styles.actions}>
-          <Link href="/carrito" className={styles.cartLink}>
-    <svg 
-      xmlns="http://www.w3.org/2000/svg" 
-      viewBox="0 0 640 512"
-      width="20" 
-      height="20"
-      fill="currentColor"
-      className={styles.cartIcon}
-    >
-      <path d="M24-16C10.7-16 0-5.3 0 8S10.7 32 24 32l45.3 0c3.9 0 7.2 2.8 7.9 6.6l52.1 286.3c6.2 34.2 36 59.1 70.8 59.1L456 384c13.3 0 24-10.7 24-24s-10.7-24-24-24l-255.9 0c-11.6 0-21.5-8.3-23.6-19.7l-5.1-28.3 303.6 0c30.8 0 57.2-21.9 62.9-52.2L568.9 69.9C572.6 50.2 557.5 32 537.4 32l-412.7 0-.4-2c-4.8-26.6-28-46-55.1-46L24-16zM208 512a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm224 0a48 48 0 1 0 0-96 48 48 0 1 0 0 96z"/>
-    </svg>
-  </Link>
-     
-          {/* 4. Lógica condicional */}
+          
+          {/* Icono de Búsqueda (TODO: Implementar modal) */}
+          <button className={styles.iconButton} title="Buscar">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </button>
+          
+          {/* Icono de Carrito */}
+          <Link href="/carrito" className={styles.iconButton} title="Carrito">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+          </Link>
+          
+          {/* 6. Lógica condicional para Login/Cuenta */}
           {user ? (
-            // Si el usuario ESTÁ logueado
             <>
-      <Link href="/mi-cuenta" className={styles.accountLink}>
-        <svg 
-          xmlns="http://www.w3.org/2000/svg" 
-          viewBox="0 0 448 512"
-          width="18" 
-          height="18"
-          fill="currentColor"
-          className={styles.userIcon}
-        >
-          <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7c0-98.5-79.8-178.3-178.3-178.3l-91.4 0z"/>
-        </svg>
-      </Link>
-      <SignOutButton />
-    </>
+              {/* Enlace a "Mi Cuenta" o "Admin" */}
+              <Link 
+                href={userRole === 'admin' ? '/admin' : '/mi-cuenta'} 
+                className={styles.iconButton} 
+                title={userRole === 'admin' ? 'Panel de Admin' : 'Mi Cuenta'}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+              </Link>
+              {/* Botón de Salir (ahora solo ícono) */}
+              <SignOutButton />
+            </>
           ) : (
-            // Si el usuario NO está logueado
+            // Si no está logueado, mostrar enlaces de texto
             <>
-              <Link href="/login">Login</Link>
-              <Link href="/register">Registro</Link>
+              <Link href="/login" className={styles.navLink}>Login</Link>
             </>
           )}
         </div>

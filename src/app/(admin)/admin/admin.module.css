@@ -21,8 +21,3 @@
   color: var(--primary-color);
 }
 
-@media (prefers-color-scheme: dark) {
-  .statCard {
-    background-color: #222;
-  }
-}

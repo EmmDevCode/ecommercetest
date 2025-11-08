@@ -1,0 +1,201 @@
+/* src/components/home/HeroCarousel.module.css */
+.carouselContainer {
+  position: relative;
+  width: 100%;
+  height: 400px; /* O puedes usar min-height: 400px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  /* Quita cualquier background-color aquí */
+}
+
+.slide {
+  position: absolute;
+  /* El slide activo ocupa el 70% del contenedor */
+  width: 70%; 
+  height: 90%;
+  border-radius: 12px;
+  
+  /* Contenido centrado */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* Tu estilo Neumorfismo (modo claro).
+    ¡Ajusta estos colores a los de tu tema! 
+  */
+  background-color: #e0e5ec; /* Color base claro */
+  box-shadow: 9px 9px 16px #a3b1c6, -9px -9px 16px #ffffff;
+}
+
+
+
+.slide h2 {
+  font-size: 2.5rem;
+  color: white;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+/* --- Ghost Slides (Prev/Next) --- */
+.ghost {
+  z-index: 1; /* Detrás del slide activo */
+  cursor: pointer;
+  /* Los ghosts no tienen sombra */
+  box-shadow: none; 
+}
+
+.prev {
+  /* Posicionado a la izquierda del contenedor */
+  left: 0;
+  /* 'animate={{ x: '-70%' }}' lo mueve a su lugar */
+}
+
+.next {
+  /* Posicionado a la derecha del contenedor */
+  right: 0;
+  /* 'animate={{ x: '70%' }}' lo mueve a su lugar */
+}
+
+/* --- Slide Activo --- */
+.slide:not(.ghost) {
+  z-index: 2; /* Encima de los ghosts */
+  cursor: grab;
+}
+.slide:not(.ghost):active {
+  cursor: grabbing;
+}
+
+/* --- Puntos de Navegación (Tu diseño) --- */
+.dots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px; /* Espacio entre cada punto */
+  z-index: 3;
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 8px;
+  border-radius: 20px;
+}
+
+.dotContainer {
+  /* Contenedor del tamaño de la píldora activa */
+  width: 30px; 
+  height: 12px;
+  background: none;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.inactiveDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.activePill {
+  /* La píldora que se anima con layoutId */
+  width: 30px;
+  height: 12px;
+  border-radius: 6px;
+  background-color: white;
+  position: absolute;
+}
+
+.slideActions {
+  position: absolute;
+  bottom: 70px; /* Justo encima de los puntos */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.75rem;
+  z-index: 3;
+}
+
+.actionButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 99px; /* Forma de píldora */
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  backdrop-filter: blur(10px);
+  transition: all 0.2s ease;
+  border: 1px solid transparent; /* Borde sutil */
+}
+
+.actionButton .icon {
+  display: inline-block;
+  font-size: 1.125rem;
+  line-height: 1;
+}
+
+/* Botón "ver producto" (Claro) */
+.primary {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #333;
+  border-color: rgba(255, 255, 255, 0.5);
+}
+.primary:hover {
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Botón "buscar producto" (Oscuro) */
+.secondary {
+  background-color: rgba(0, 0, 0, 0.3);
+  color: white;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+.secondary:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Responsive (Móvil) --- */
+@media (max-width: 768px) {
+  .carouselContainer {
+    /* En móvil, quitamos el overflow
+       para que la sombra del Neumorfismo se vea bien */
+    overflow: visible;
+  }
+  
+  .slide {
+    width: 90%; /* El slide activo ocupa casi todo */
+    height: 85%;
+  }
+  
+  .ghost {
+     /* En móvil, ocultamos los ghosts */
+     display: none;
+  }
+  
+  .slide:not(.ghost) {
+     /* El slide activo ya no es 'absolute' */
+     position: relative;
+  }
+
+  .slideActions {
+    bottom: 60px; /* Sube los botones */
+    gap: 0.5rem;
+  }
+
+  .actionButton {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.75rem;
+  }
+
+  .dots {
+    bottom: 20px; /* Mantiene su posición original */
+  }
+}

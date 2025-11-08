@@ -70,20 +70,3 @@
   }
 }
 
-/* Modo oscuro */
-@media (prefers-color-scheme: dark) {
-  .navList {
-    border-left-color: #333;
-  }
-  .navLink:hover {
-    background-color: #222;
-  }
-  .signOutWrapper {
-    border-top-color: #333;
-  }
-  @media (max-width: 768px) {
-    .navList {
-      border-bottom-color: #333;
-    }
-  }
-}

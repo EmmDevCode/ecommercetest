@@ -110,28 +110,3 @@
   cursor: not-allowed;
 }
 
-/* --- MODO OSCURO --- */
-@media (prefers-color-scheme: dark) {
-  .form {
-    background-color: #222;
-    border: 1px solid #444;
-  }
-  .formGroup label { color: #eee; }
-  .formGroup input,
-  .formGroup textarea {
-    background-color: #333;
-    color: #eee;
-    border-color: #555;
-  }
-  .checkboxGrid {
-    background-color: #333;
-    border-color: #555;
-  }
-  .skuTable th { background-color: #333; }
-  .skuTable td { border-color: #444; }
-  .skuTable input {
-    background-color: #444;
-    border-color: #666;
-    color: #eee;
-  }
-}

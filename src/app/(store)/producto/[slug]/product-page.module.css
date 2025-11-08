@@ -112,12 +112,3 @@
   }
 }
 
-/* Dark mode */
-@media (prefers-color-scheme: dark) {
-  .category {
-    color: #999;
-  }
-  .mockReview {
-    background-color: #222;
-  }
-}

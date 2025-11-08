@@ -63,12 +63,3 @@
   font-family: monospace;
 }
 
-/* Modo Oscuro */
-@media (prefers-color-scheme: dark) {
-  .noOrders {
-    background-color: #222;
-  }
-  .ordersTable th {
-    background-color: #333;
-  }
-}

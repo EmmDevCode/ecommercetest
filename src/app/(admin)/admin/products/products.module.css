@@ -51,16 +51,3 @@
   border: 1px solid #ddd;
 }
 
-/* Modo Oscuro */
-@media (prefers-color-scheme: dark) {
-  .productsTable th {
-    background-color: #333;
-    border-bottom: 1px solid #444;
-  }
-  .productsTable td {
-    border-bottom: 1px solid #444;
-  }
-  .productImage {
-    border-color: #444;
-  }
-}

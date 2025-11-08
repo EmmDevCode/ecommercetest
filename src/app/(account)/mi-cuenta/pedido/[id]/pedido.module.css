@@ -99,24 +99,7 @@
   padding-top: 1rem;
 }
 
-/* Modo oscuro */
-@media (prefers-color-scheme: dark) {
-  .itemsList {
-    border-color: #333;
-  }
-  .item {
-    border-bottom-color: #333;
-  }
-  .summary {
-    background-color: #222;
-  }
-  .summary h3, .summaryTotal {
-    border-color: #444;
-  }
-  .breadcrumb {
-    color: #999;
-  }
-}
+
 
 /* En pedido.module.css */
 .item.unavailable {

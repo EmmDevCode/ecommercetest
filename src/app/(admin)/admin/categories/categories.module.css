@@ -31,8 +31,3 @@
   font-family: monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  .list li {
-    background-color: #222;
-  }
-}

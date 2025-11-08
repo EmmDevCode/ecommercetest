@@ -45,12 +45,3 @@
   font-weight: 500;
 }
 
-@media (prefers-color-scheme: dark) {
-  .attributeCard {
-    background-color: #222;
-  }
-  .optionTag {
-    background-color: #333;
-    border-color: #444;
-  }
-}

@@ -77,10 +77,3 @@
   cursor: pointer;
 }
 
-/* Modo oscuro */
-@media (prefers-color-scheme: dark) {
-  .summary {
-    background-color: #1a1a1a;
-    border-color: #333;
-  }
-}

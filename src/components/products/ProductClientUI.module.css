@@ -180,21 +180,3 @@
   background-color: var(--secondary-color);
 }
 
-/* Dark mode */
-@media (prefers-color-scheme: dark) {
-  .optionButton {
-    border-color: #444;
-  }
-  .optionButton:hover {
-    border-color: #888;
-  }
-  .optionButton:disabled {
-    color: #666;
-  }
-  .iconButton {
-    border-color: #444;
-  }
-  .iconButton:hover {
-    background-color: #222;
-  }
-}

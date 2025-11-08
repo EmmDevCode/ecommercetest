@@ -45,16 +45,3 @@
   color: white;
 }
 
-/* Modo oscuro */
-@media (prefers-color-scheme: dark) {
-  .sidebar {
-    background-color: #111;
-    border-right-color: #333;
-  }
-  .navLink:hover {
-    background-color: #222;
-  }
-  .navLink.active {
-    background-color: var(--primary-color);
-  }
-}

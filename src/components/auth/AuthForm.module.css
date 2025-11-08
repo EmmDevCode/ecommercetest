@@ -80,32 +80,3 @@
   margin-bottom: 1rem;
 }
 
-/* --- ESTILOS PARA MODO OSCURO --- */
-@media (prefers-color-scheme: dark) {
-  .form {
-    background-color: #222; /* Fondo del formulario oscuro */
-    border: 1px solid #444;
-  }
-
-  .formGroup label {
-    color: #eee; /* Texto de label claro */
-  }
-
-  .formGroup input {
-    background-color: #333; /* Fondo de input oscuro */
-    color: #eee;
-    border-color: #555;
-  }
-
-  .messageError {
-    background-color: #4d0a0a;
-    color: #ffcdd2;
-    border-color: #d93025;
-  }
-
-  .messageSuccess {
-    background-color: #0c3b1e;
-    color: #b9f6ca;
-    border-color: #1e8e3e;
-  }
-}
