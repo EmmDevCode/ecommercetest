@@ -1,8 +1,9 @@
 "use client";
 
 import { useTransition } from 'react';
-import { updateOrderStatus } from '@/app/admin/orders/actions';
+import { updateOrderStatus } from '@/app/(admin)/admin/orders/actions';
 import styles from './StatusSelector.module.css';
+import { toast } from 'sonner';
 
 // Opciones que coinciden con tu ENUM de la base de datos
 const statusOptions = [
@@ -30,9 +31,13 @@ export const StatusSelector = ({ orderId, currentStatus }: StatusSelectorProps) 
     // Inicia la Server Action en una transición
     startTransition(async () => {
       const result = await updateOrderStatus(orderId, newStatus);
-      if (!result.success) {
-        alert(result.message); // Muestra error si algo falla
+      // --- 2. Reemplazar alert (y añadir éxito) ---
+      if (result.success) {
+        toast.success(result.message); // Notificar éxito
+      } else {
+        toast.error(result.message); // Muestra error si algo falla
       }
+      // ------------------------------------------
     });
   };
 

@@ -1,0 +1,38 @@
+/* src/app/(admin)/admin/categories/categories.module.css */
+.page {
+  max-width: 1000px;
+}
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+.listContainer h3,
+.formContainer h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: var(--secondary-color);
+  border-radius: 6px;
+}
+.list li small {
+  font-family: monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  .list li {
+    background-color: #222;
+  }
+}

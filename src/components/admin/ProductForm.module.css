@@ -1,37 +1,93 @@
+/* src/components/admin/ProductForm.module.css */
+/* (Estilos base de tu AuthForm) */
 .form {
-  max-width: 500px;
+  max-width: 800px;
   margin: 2rem auto;
   padding: 2rem;
   border-radius: 8px;
   background-color: #f9f9f9;
   border: 1px solid #ddd;
 }
-
 .formGroup {
   margin-bottom: 1.25rem;
   display: flex;
   flex-direction: column;
 }
-
 .formGroup label {
   margin-bottom: 0.5rem;
   font-weight: 600;
   color: #333;
 }
-
-.formGroup input {
+.formGroup input,
+.formGroup textarea {
   padding: 0.75rem;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 1rem;
   background-color: #fff;
   color: #111;
+  width: 100%;
 }
-
-.formGroup input:focus {
+.formGroup input:focus,
+.formGroup textarea:focus {
   outline: none;
   border-color: var(--primary-color);
   box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.2);
+}
+
+/* --- NUEVOS ESTILOS --- */
+.checkboxGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.5rem;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 4px;
+}
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+}
+
+.generateButton {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #e0e7ff;
+  color: #3730a3;
+  font-weight: 600;
+  cursor: pointer;
+}
+.generateButton:hover {
+  background-color: #c7d2fe;
+}
+
+.skuTableWrapper {
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+}
+.skuTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+.skuTable th,
+.skuTable td {
+  padding: 0.75rem;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+.skuTable th {
+  background-color: #f3f4f6;
+}
+.skuTable input {
+  width: 100px;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 .submitButton {
@@ -46,66 +102,36 @@
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
-
 .submitButton:hover {
   filter: brightness(0.9);
 }
-
 .submitButton:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }
 
-.errorText {
-  margin-top: 0.25rem;
-  color: #d93025;
-  font-size: 0.875rem;
-}
-
-.messageError {
-  padding: 1rem;
-  background-color: #ffebee;
-  color: #d93025;
-  border: 1px solid #d93025;
-  border-radius: 4px;
-  margin-bottom: 1rem;
-}
-
-.messageSuccess {
-  padding: 1rem;
-  background-color: #e6f7ea;
-  color: #1e8e3e;
-  border: 1px solid #1e8e3e;
-  border-radius: 4px;
-  margin-bottom: 1rem;
-}
-
-/* --- ESTILOS PARA MODO OSCURO --- */
+/* --- MODO OSCURO --- */
 @media (prefers-color-scheme: dark) {
   .form {
-    background-color: #222; /* Fondo del formulario oscuro */
+    background-color: #222;
     border: 1px solid #444;
   }
-
-  .formGroup label {
-    color: #eee; /* Texto de label claro */
-  }
-
-  .formGroup input {
-    background-color: #333; /* Fondo de input oscuro */
+  .formGroup label { color: #eee; }
+  .formGroup input,
+  .formGroup textarea {
+    background-color: #333;
     color: #eee;
     border-color: #555;
   }
-
-  .messageError {
-    background-color: #4d0a0a;
-    color: #ffcdd2;
-    border-color: #d93025;
+  .checkboxGrid {
+    background-color: #333;
+    border-color: #555;
   }
-
-  .messageSuccess {
-    background-color: #0c3b1e;
-    color: #b9f6ca;
-    border-color: #1e8e3e;
+  .skuTable th { background-color: #333; }
+  .skuTable td { border-color: #444; }
+  .skuTable input {
+    background-color: #444;
+    border-color: #666;
+    color: #eee;
   }
 }

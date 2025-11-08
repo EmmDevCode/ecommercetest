@@ -14,19 +14,17 @@ export type CartActionResult = {
  * Añade un producto al carrito del usuario actual.
  */
 export async function addToCart(
-  productId: string
+  skuId: string // <-- 1. Recibe 'skuId', no 'productId'
 ): Promise<CartActionResult> {
   const supabase = await createClient();
 
-  // 1. Verificar que el usuario esté logueado
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) {
-    return { success: false, message: "Debes iniciar sesión para añadir productos." };
+    return { success: false, message: "Debes iniciar sesión." };
   }
 
   try {
-    // 2. Estrategia mejorada para manejar el carrito
-    // Primero intentamos obtener el carrito existente
+    // 2. Obtener el carrito del usuario
     const { data: existingCart, error: cartFetchError } = await supabase
       .from('carts')
       .select('id')
@@ -34,62 +32,54 @@ export async function addToCart(
       .single();
 
     let cartId;
-
     if (cartFetchError || !existingCart) {
-      // Si no existe, creamos un nuevo carrito
+      // Crear carrito si no existe
       const { data: newCart, error: createError } = await supabase
         .from('carts')
         .insert({ user_id: user.id })
         .select('id')
         .single();
-
-      if (createError || !newCart) {
-        throw new Error("No se pudo crear el carrito.");
-      }
+      if (createError || !newCart) throw new Error("No se pudo crear el carrito.");
       cartId = newCart.id;
     } else {
       cartId = existingCart.id;
     }
 
-    // 3. Verificar si el producto ya está en el carrito
+    // 3. Verificar si el SKU ya está en el carrito
     const { data: existingItem, error: findError } = await supabase
       .from('cart_items')
       .select('id, quantity')
       .eq('cart_id', cartId)
-      .eq('product_id', productId)
+      .eq('sku_id', skuId) // <-- 4. Buscar por 'sku_id'
       .single();
 
     if (findError && findError.code !== 'PGRST116') {
-      // PGRST116 = "No rows found" (lo cual está bien)
       throw findError;
     }
 
     if (existingItem) {
-      // 4. SI EXISTE: Actualizar cantidad (quantity + 1)
+      // 5. SI EXISTE: Actualizar cantidad
       const newQuantity = existingItem.quantity + 1;
       const { error: updateError } = await supabase
         .from('cart_items')
         .update({ quantity: newQuantity })
         .eq('id', existingItem.id);
-
       if (updateError) throw updateError;
       
     } else {
-      // 5. NO EXISTE: Insertar nuevo item
+      // 6. NO EXISTE: Insertar nuevo item con 'sku_id'
       const { error: insertError } = await supabase
         .from('cart_items')
         .insert({
           cart_id: cartId,
-          product_id: productId,
+          sku_id: skuId, // <-- 7. Usar 'sku_id'
           quantity: 1,
         });
-
       if (insertError) throw insertError;
     }
 
-    // 6. Revalidar el path del header (para actualizar el ícono del carrito)
-    revalidatePath('/'); // Para el header
-    revalidatePath('/carrito'); // ¡PARA ACTUALIZAR LA PÁGINA DEL CARRITO!
+    revalidatePath('/'); 
+    revalidatePath('/carrito');
 
     return { success: true, message: "¡Producto añadido!" };
 

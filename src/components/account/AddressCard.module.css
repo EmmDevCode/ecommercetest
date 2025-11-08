@@ -1,0 +1,74 @@
+/* src/components/account/AddressCard.module.css */
+.card {
+  border: 1px solid var(--secondary-color);
+  background-color: var(--background-end-rgb);
+  border-radius: 8px;
+  padding: 1.5rem;
+  position: relative;
+}
+
+.addressLine {
+  margin-bottom: 0.25rem;
+  color: var(--foreground-rgb);
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--secondary-color);
+}
+
+.button {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  background-color: var(--secondary-color);
+  color: var(--foreground-rgb);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  border: none;
+}
+
+.deleteButton {
+  background-color: transparent;
+  color: #d93025;
+}
+.deleteButton:hover {
+  background-color: #ffebee;
+}
+
+.defaultBadge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background-color: #e6f7ea;
+  color: #1e8e3e;
+  padding: 0.25rem 0.5rem;
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* Modo oscuro */
+@media (prefers-color-scheme: dark) {
+  .card {
+    background-color: #1a1a1a;
+    border-color: #333;
+  }
+  .actions {
+    border-top-color: #333;
+  }
+  .button {
+    background-color: #333;
+  }
+  .deleteButton:hover {
+    background-color: #4d0a0a;
+  }
+  .defaultBadge {
+    background-color: #0c3b1e;
+    color: #b9f6ca;
+  }
+}

@@ -1,8 +1,7 @@
 import { createClient } from '@/lib/supabase/server';
-import { cookies } from 'next/headers';
 import Link from 'next/link';
 // Importaremos los estilos del admin para reutilizar las burbujas de estado
-import adminStyles from '../admin/orders/orders.module.css';
+import adminStyles from '@/app/(admin)//admin-layout.module.css';
 // Importaremos los estilos de esta página
 import styles from './mi-cuenta.module.css';
 

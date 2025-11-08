@@ -3,6 +3,7 @@
 import { useTransition } from 'react';
 import { updateQuantity } from '@/app/carrito/actions';
 import styles from './QuantitySelector.module.css';
+import { toast } from 'sonner';
 
 interface QuantitySelectorProps {
   cartItemId: string;
@@ -21,8 +22,8 @@ export const QuantitySelector = ({
 
     startTransition(async () => {
       const result = await updateQuantity(cartItemId, newQuantity);
-      if (!result.success) {
-        alert(result.message);
+     if (!result.success) {
+        toast.error(result.message);
       }
     });
   };

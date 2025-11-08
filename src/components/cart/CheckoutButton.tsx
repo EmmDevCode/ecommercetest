@@ -3,20 +3,31 @@
 import { useTransition } from 'react';
 import { createOrderAndPay } from '@/app/checkout/actions';
 import styles from './CheckoutButton.module.css';
+import { toast } from 'sonner';
 
-export const CheckoutButton = () => {
+interface CheckoutButtonProps {
+  addressId: string | null; // El ID de la dirección seleccionada
+}
+
+export const CheckoutButton = ({ addressId }: CheckoutButtonProps) => {
   let [isPending, startTransition] = useTransition();
 
   const handleCheckout = () => {
+    // 2. Valida el addressId aquí
+    if (!addressId) {
+      toast.error("Por favor, selecciona una dirección de envío.");
+      return;
+    }
+
     startTransition(async () => {
-      const result = await createOrderAndPay();
+      // 3. Pasa el addressId a la Server Action
+      const result = await createOrderAndPay(addressId);
       
       if (result.success && result.url) {
-        // ¡Éxito! Redirigimos al usuario a la URL de pago de Conekta
+        // ¡Éxito! Redirigimos
         window.location.href = result.url;
       } else {
-        // Mostramos el error
-        alert(result.message);
+        toast.error(result.message);
       }
     });
   };

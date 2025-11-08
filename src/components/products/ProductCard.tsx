@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import styles from './ProductCard.module.css';
-import { AddToCartButton } from './AddToCartButton';
+
 
 // Define el tipo de datos para un producto (puedes moverlo a un archivo .d.ts)
 // Coincide con tu tabla 'products'
@@ -44,7 +44,6 @@ export const ProductCard = ({ product }: ProductCardProps) => {
       
       {/* 2. Añade el botón aquí abajo */}
       <div className={styles.buttonWrapper}>
-        <AddToCartButton productId={product.id} />
       </div>
     </div>
   );

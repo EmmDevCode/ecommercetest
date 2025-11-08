@@ -1,0 +1,14 @@
+/* src/app/(admin)/admin-layout.module.css */
+.adminLayout {
+  display: flex;
+}
+
+.adminContent {
+  /* Ocupa el resto del espacio */
+  flex: 1; 
+  /* Mueve el contenido para que no quede debajo del sidebar */
+  margin-left: 250px; 
+  /* Padding interno para el contenido */
+  padding: 2rem;
+  min-height: 100vh;
+}

@@ -1,5 +1,4 @@
 import { createClient } from '@/lib/supabase/server';
-import { cookies } from 'next/headers';
 import Link from 'next/link';
 import styles from './products.module.css';
 
@@ -23,7 +22,7 @@ async function getProducts() {
   // Obtenemos los productos
   const { data, error } = await supabase
     .from('products')
-    .select('id, name, price, stock, images')
+    .select('id, name, price, images') 
     .order('created_at', { ascending: false });
 
   if (error) {
@@ -84,7 +83,6 @@ export default async function AdminProductsPage() {
                   currency: 'MXN',
                 }).format(product.price)}
               </td>
-              <td>{product.stock}</td>
               <td>
                 <Link 
                   href={`/admin/products/${product.id}/edit`} 

@@ -1,0 +1,123 @@
+/* src/app/(store)/producto/[slug]/product-page.module.css */
+
+.pageContainer {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* --- Layout Principal (Galería + Info) --- */
+.mainSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 50% y 50% */
+  gap: 2rem;
+}
+
+/* En móviles, poner la info debajo de la galería 
+*/
+@media (max-width: 768px) {
+  .mainSection {
+    grid-template-columns: 1fr; /* 100% */
+  }
+}
+
+/* --- Lado Derecho (Info) --- */
+.infoWrapper {
+  /* Contenedor para el 'sticky' */
+  position: relative;
+}
+
+.infoSticky {
+  position: sticky;
+  top: 100px; /* 100px desde el top (deja espacio para tu Header) */
+  display: flex;
+  flex-direction: column;
+}
+
+.category {
+  font-size: 0.875rem;
+  color: #555;
+  margin-bottom: 0.5rem;
+}
+
+.title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.price {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.ratingSummary {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.stars {
+  color: #f5a623; /* Amarillo estrella */
+  font-size: 1.25rem;
+}
+
+/* --- Secciones Inferiores --- */
+.detailsSection,
+.reviewsSection,
+.relatedSection {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--secondary-color);
+}
+
+.detailsSection h2,
+.reviewsSection h2,
+.relatedSection h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.detailsSection p {
+  line-height: 1.7;
+}
+
+/* Mock de Reseña (temporal) */
+.mockReview {
+  padding: 1rem;
+  background-color: var(--secondary-color);
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+/* Grid de Productos Relacionados */
+.relatedGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+  .relatedGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .relatedGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  .category {
+    color: #999;
+  }
+  .mockReview {
+    background-color: #222;
+  }
+}

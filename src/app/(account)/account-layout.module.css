@@ -1,0 +1,19 @@
+/* src/app/(account)/account-layout.module.css */
+.accountLayout {
+  display: flex;
+  gap: 2rem;
+}
+
+.accountContent {
+  /* Ocupa el resto del espacio */
+  flex: 1; 
+  min-height: 60vh;
+}
+
+/* En móvil, poner la barra de nav arriba */
+@media (max-width: 768px) {
+  .accountLayout {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}

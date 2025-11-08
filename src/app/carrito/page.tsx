@@ -2,25 +2,46 @@ import { createClient } from '@/lib/supabase/server';
 import Link from 'next/link';
 import { CartView } from '@/components/cart/CartView';
 import styles from './carrito.module.css';
-import { CheckoutButton } from '@/components/cart/CheckoutButton';
+import { CheckoutFlow } from '@/components/cart/CheckoutFlow';
 
-// --- Definición de Tipos CORREGIDA ---
+// --- (Tipos 'CartItemWithProduct' y 'Address' se quedan igual) ---
 export type CartItemWithProduct = {
   id: string;
   quantity: number;
-  products: { // ES UN OBJETO, no array
+  skus: { 
     id: string;
-    name: string;
-    price: number;
-    images: any;
+    price: number | null;
+    products: { 
+      id: string;
+      name: string;
+      price: number; 
+      images: any;
+      slug: string;
+    } | null;
+    sku_options: { 
+      attribute_options: {
+        value: string; 
+        attributes: {
+          name: string; 
+        }
+      }
+    }[]
   } | null;
 };
 
-// --- Función de Carga de Datos CORREGIDA ---
-// --- Función ALTERNATIVA con tipo más estricto ---
+type Address = {
+  id: string;
+  street: string;
+  exterior_num: string;
+  colony: string;
+  city: string;
+  postal_code: string;
+  is_default: boolean;
+};
+
+// --- (getCartItems y getAddresses se quedan igual) ---
 async function getCartItems(): Promise<CartItemWithProduct[]> {
   const supabase = await createClient();
-
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return [];
 
@@ -30,64 +51,74 @@ async function getCartItems(): Promise<CartItemWithProduct[]> {
       cart_items (
         id, 
         quantity,
-        products (
-          id, 
-          name, 
-          price, 
-          images
+        skus (
+          id,
+          price,
+          products ( id, name, price, images, slug ),
+          sku_options (
+            attribute_options (
+              value,
+              attributes ( name )
+            )
+          )
         )
       )
     `)
     .eq('user_id', user.id)
     .single();
 
-  if (error || !data?.cart_items) return [];
+  if (error || !data?.cart_items) {
+    console.error("Error al cargar carrito:", error);
+    return [];
+  }
+  
+  const validItems = data.cart_items.filter(
+    (item: any) => item.skus && item.skus.products
+  );
+  
+  return validItems as unknown as CartItemWithProduct[];
+}
 
-  // Transformación explícita de los datos
-  const validItems: CartItemWithProduct[] = data.cart_items
-    .map((item: any) => {
-      // Si products es un array, tomamos el primer elemento
-      // Si es un objeto, lo usamos directamente
-      let products = item.products;
-      
-      if (Array.isArray(products) && products.length > 0) {
-        products = products[0];
-      } else if (Array.isArray(products) && products.length === 0) {
-        products = null;
-      }
-      
-      return {
-        id: item.id,
-        quantity: item.quantity,
-        products: products
-      };
-    })
-    .filter((item: any) => item.products !== null && item.products.id);
+async function getAddresses(): Promise<Address[]> {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return [];
 
-  return validItems;
+  const { data, error } = await supabase
+    .from('addresses')
+    .select('id, street, exterior_num, colony, city, postal_code, is_default')
+    .eq('user_id', user.id)
+    .order('is_default', { ascending: false });
+
+  if (error) {
+    console.error("Error al cargar direcciones del carrito:", error);
+    return [];
+  }
+  return data as Address[];
 }
 
 // --- El Componente de Página ACTUALIZADO ---
 export default async function CarritoPage() {
-  const items = await getCartItems();
+  const [items, addresses] = await Promise.all([
+    getCartItems(),
+    getAddresses()
+  ]);
 
-  console.log('🛒 Items para procesar:', items);
-
-  // CÁLCULO DEL SUBTOTAL CORREGIDO
+  // --- 1. AQUÍ ESTÁ LA CORRECCIÓN ---
   const subtotal = items.reduce((acc, item) => {
-    // Verificación más robusta
-    if (!item.products || 
-        typeof item.products !== 'object' ||
-        Array.isArray(item.products) || // ← Verificar que NO sea array
-        typeof item.products.price !== 'number') {
-      console.warn('Producto inválido en item:', item);
+    // 1a. Validar la NUEVA estructura
+    if (!item.skus || !item.skus.products) {
+      console.warn('Item inválido en el carrito:', item);
       return acc;
     }
     
-    return acc + (item.products.price * item.quantity);
+    // 1b. Usar el precio del SKU. Si es nulo, usar el precio base del producto.
+    const price = item.skus.price || item.skus.products.price;
+    
+    // 1c. Calcular
+    return acc + (price * item.quantity);
   }, 0);
-
-  console.log('💰 Subtotal calculado:', subtotal);
+  // --- FIN DE LA CORRECCIÓN ---
 
   const formattedSubtotal = new Intl.NumberFormat('es-MX', {
     style: 'currency',
@@ -124,9 +155,7 @@ export default async function CarritoPage() {
               <span>Total:</span>
               <span>{formattedSubtotal}</span>
             </div>
-            <div className={styles.checkoutButtonWrapper}>
-              <CheckoutButton />
-            </div>
+            <CheckoutFlow addresses={addresses} />
           </div>
         </div>
       )}

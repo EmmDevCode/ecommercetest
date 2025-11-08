@@ -1,0 +1,200 @@
+/* src/components/products/ProductClientUI.module.css */
+
+.clientWrapper {
+  /* Este componente envuelve la galería y las acciones 
+     en la versión móvil, para que no se separen */
+  display: contents;
+}
+
+@media (max-width: 768px) {
+  .clientWrapper {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+/* --- 1. Galería --- */
+.gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.mainImageWrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1; /* Cuadrado perfecto */
+  border: 1px solid var(--secondary-color);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.mainImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.thumbnailList {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.5rem;
+}
+
+.thumbnail {
+  aspect-ratio: 1 / 1;
+  border-radius: 4px;
+  border: 2px solid transparent;
+  padding: 0;
+  cursor: pointer;
+  overflow: hidden;
+  opacity: 0.7;
+  transition: all 0.2s ease;
+}
+
+.thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.thumbnail:hover {
+  opacity: 1;
+  border-color: var(--primary-color);
+}
+
+.thumbnail.active {
+  opacity: 1;
+  border-color: var(--primary-color);
+  transform: scale(1.05);
+}
+
+/* --- 2. Acciones y Variantes --- */
+.actions {
+  /* En layout de escritorio, este div vive en el .infoWrapper */
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  /* En móvil, se separa de la info y se pone bajo la galería */
+  .actions {
+    margin-top: 1.5rem;
+  }
+}
+
+.variantGroup {
+  margin-bottom: 1.5rem;
+}
+
+.variantLabel {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.variantLabel strong {
+  font-weight: 700;
+  margin-left: 0.25rem;
+}
+
+.optionList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.optionButton {
+  padding: 0.5rem 1rem;
+  border: 1.5px solid var(--secondary-color);
+  background-color: var(--background-end-rgb);
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  position: relative; /* Para la línea de agotado */
+}
+
+.optionButton:hover {
+  border-color: #555;
+}
+
+.optionButton.active {
+  border-color: var(--primary-color);
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.optionButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  color: #999;
+}
+
+.soldOutLine {
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  right: 5%;
+  height: 1.5px;
+  background-color: #999;
+  transform: rotate(-10deg);
+}
+
+.optionButton.active:disabled .soldOutLine {
+  background-color: white;
+}
+
+/* --- 3. Botones --- */
+.cartButtonWrapper {
+  margin-top: 2rem;
+}
+
+/* El botón de 'AddToCartButton' ya es 100% width por defecto,
+   así que no necesitamos estilizarlo mucho más. */
+
+.secondaryButtons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  gap: 1rem;
+}
+
+.iconButton {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: none;
+  border: 1.5px solid var(--secondary-color);
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.iconButton svg {
+  width: 18px;
+  height: 18px;
+}
+
+.iconButton:hover {
+  background-color: var(--secondary-color);
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  .optionButton {
+    border-color: #444;
+  }
+  .optionButton:hover {
+    border-color: #888;
+  }
+  .optionButton:disabled {
+    color: #666;
+  }
+  .iconButton {
+    border-color: #444;
+  }
+  .iconButton:hover {
+    background-color: #222;
+  }
+}

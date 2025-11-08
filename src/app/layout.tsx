@@ -5,6 +5,7 @@ import "./globals.css";
 // --- 1. Importa tus nuevos componentes ---
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { Toaster } from 'sonner';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -35,6 +36,12 @@ export default function RootLayout({
         
         {/* --- 3. Añade el Footer aquí --- */}
         <Footer />
+
+        {/* --- 3. Añade el Toaster aquí --- 
+           richColors aplica estilos automáticos para éxito y error.
+           position="bottom-right" lo coloca donde pediste.
+        */}
+        <Toaster position="bottom-right" richColors />
 
       </body>
     </html>

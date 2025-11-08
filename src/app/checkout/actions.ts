@@ -25,7 +25,9 @@ type CartData = {
   cart_items: CartItemWithProduct[];
 };
 
-export async function createOrderAndPay(): Promise<CreateOrderResult> {
+export async function createOrderAndPay(
+  addressId: string 
+): Promise<CreateOrderResult> {
   const supabase = await createClient();
 
   // --- VERIFICACIÓN INICIAL DE API KEY ---
@@ -50,12 +52,23 @@ export async function createOrderAndPay(): Promise<CreateOrderResult> {
     return { success: false, message: "Usuario no autenticado." };
   }
 
-  // Obtener el perfil del usuario para el nombre
+  // Carga el perfil (para el nombre en Conekta)
   const { data: profile } = await supabase
     .from('profiles')
     .select('full_name')
     .eq('id', user.id)
     .single();
+  
+  const { data: shippingAddress, error: addressError } = await supabase
+    .from('addresses')
+    .select('*')
+    .eq('id', addressId)
+    .eq('user_id', user.id) 
+    .single();
+
+  if (addressError || !shippingAddress) {
+    return { success: false, message: "Dirección de envío no válida." };
+  }
 
   const { data: cartData, error: cartError } = await supabase
     .from('carts')
@@ -122,7 +135,7 @@ export async function createOrderAndPay(): Promise<CreateOrderResult> {
       user_id: user.id,
       total_amount: totalInDecimal,
       status: 'pending',
-      shipping_address: dummyAddress, 
+      shipping_address: shippingAddress, 
     })
     .select()
     .single();

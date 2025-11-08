@@ -1,0 +1,52 @@
+/* src/components/cart/CheckoutFlow.module.css */
+.flow {
+  border-top: 1px solid var(--secondary-color);
+  margin-top: 1rem;
+  padding-top: 1.5rem;
+}
+.title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.select {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 4px;
+  border: 1px solid var(--secondary-color);
+  background-color: var(--background-end-rgb);
+  font-size: 1rem;
+  font-family: inherit;
+  margin-bottom: 1rem;
+}
+.noAddress {
+  text-align: center;
+  padding: 1rem;
+  background-color: var(--secondary-color);
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+.noAddress p {
+  margin-bottom: 0.5rem;
+}
+.link {
+  color: var(--primary-color);
+  text-decoration: underline;
+  font-weight: 600;
+}
+.checkoutButtonWrapper {
+  /* Este div ya existía en tu carrito.module.css, 
+     pero lo movemos aquí para que el botón sea parte del flujo
+  */
+}
+
+/* Modo oscuro */
+@media (prefers-color-scheme: dark) {
+  .select {
+    background-color: #1a1a1a;
+    border-color: #333;
+  }
+  .noAddress {
+    background-color: #222;
+  }
+}

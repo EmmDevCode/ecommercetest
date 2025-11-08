@@ -1,0 +1,56 @@
+/* src/app/(admin)/admin/attributes/attributes.module.css */
+/* Reutilizamos los estilos de categories.module.css */
+.page {
+  max-width: 1000px;
+}
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+.listContainer h3,
+.formContainer h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+/* --- Estilos específicos de Atributos --- */
+.attributeCard {
+  padding: 1.5rem;
+  background-color: var(--secondary-color);
+  border-radius: 8px;
+}
+.attributeCard h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+.optionsGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+.optionTag {
+  padding: 0.25rem 0.75rem;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 99px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+@media (prefers-color-scheme: dark) {
+  .attributeCard {
+    background-color: #222;
+  }
+  .optionTag {
+    background-color: #333;
+    border-color: #444;
+  }
+}

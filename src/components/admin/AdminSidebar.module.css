@@ -1,0 +1,60 @@
+/* src/components/admin/AdminSidebar.module.css */
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background-color: var(--background-end-rgb);
+  border-right: 1px solid var(--secondary-color);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  padding: 0 0.5rem;
+}
+
+.navList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.navLink {
+  display: block;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.navLink:hover {
+  background-color: var(--secondary-color);
+}
+
+.navLink.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* Modo oscuro */
+@media (prefers-color-scheme: dark) {
+  .sidebar {
+    background-color: #111;
+    border-right-color: #333;
+  }
+  .navLink:hover {
+    background-color: #222;
+  }
+  .navLink.active {
+    background-color: var(--primary-color);
+  }
+}

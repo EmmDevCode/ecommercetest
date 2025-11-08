@@ -1,29 +1,34 @@
+// src/components/products/AddToCartButton.tsx
 "use client";
 
 import { useTransition } from 'react';
 import { addToCart } from '@/app/carrito/actions';
-import { Button } from '@/components/ui/Button'; // Reutilizamos nuestro botón
+import { Button } from '@/components/ui/Button'; 
+import { toast } from 'sonner';
 
 interface AddToCartButtonProps {
-  productId: string;
+  skuId: string | null; // <-- 1. Cambiado de productId a skuId
+  disabled?: boolean;
 }
 
-export const AddToCartButton = ({ productId }: AddToCartButtonProps) => {
-  // useTransition nos permite mostrar un estado "cargando"
-  // sin bloquear la UI
+export const AddToCartButton = ({ skuId, disabled = false }: AddToCartButtonProps) => {
   let [isPending, startTransition] = useTransition();
 
   const handleClick = () => {
-    // startTransition ejecuta la Server Action
+    // 2. Validar que un SKU fue seleccionado
+    if (!skuId) {
+      toast.error("Variante de producto no encontrada.");
+      return;
+    }
+
     startTransition(async () => {
-      const result = await addToCart(productId);
+      // 3. Pasar el skuId a la acción
+      const result = await addToCart(skuId);
       
       if (result.success) {
-        // Éxito: podrías mostrar un "toast" o notificación
-        alert(result.message); 
+        toast.success(result.message);
       } else {
-        // Error: muestra el mensaje de error (ej. "Debes iniciar sesión")
-        alert(result.message);
+        toast.error(result.message);
       }
     });
   };
@@ -32,9 +37,11 @@ export const AddToCartButton = ({ productId }: AddToCartButtonProps) => {
     <Button
       variant="primary"
       onClick={handleClick}
-      disabled={isPending}
+      disabled={isPending || disabled} // 4. Deshabilitado si no hay SKU
     >
-      {isPending ? "Añadiendo..." : "Añadir al Carrito"}
+      {isPending ? "Añadiendo..." : (
+        disabled ? "No disponible" : "Añadir al Carrito"
+      )}
     </Button>
   );
 };

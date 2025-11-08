@@ -1,0 +1,52 @@
+/* src/components/admin/CategoryItem.module.css */
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: var(--secondary-color);
+  border-radius: 6px;
+  gap: 1rem;
+}
+.info { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 0.25rem; 
+  flex-grow: 1;
+}
+.info span { font-weight: 500; }
+.info small { font-family: monospace; font-size: 0.75rem; }
+
+.actions { display: flex; gap: 0.5rem; flex-shrink: 0; }
+
+.input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  flex-grow: 1;
+  font-size: 1rem;
+}
+
+.button, .buttonSave, .buttonEdit, .buttonDelete, .buttonCancel {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.buttonEdit { background-color: #e0e7ff; color: #3730a3; }
+.buttonSave { background-color: #d1fae5; color: #065f46; }
+.buttonDelete { background-color: #fee2e2; color: #991b1b; }
+.buttonCancel { background-color: transparent; }
+
+.buttonDelete:disabled { opacity: 0.5; }
+
+@media (prefers-color-scheme: dark) {
+  .item { background-color: #222; }
+  .input { background-color: #333; border-color: #555; color: #eee; }
+  .buttonEdit { background-color: #312e81; color: #c7d2fe; }
+  .buttonSave { background-color: #10402b; color: #a7f3d0; }
+  .buttonDelete { background-color: #5b1b1b; color: #fecaca; }
+}
