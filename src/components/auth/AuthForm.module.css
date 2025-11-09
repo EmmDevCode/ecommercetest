@@ -147,16 +147,17 @@
   cursor: pointer;
 }
 
-.error {
-  color: #ef4444;
+.errorText {
+  color: #d93025; /* Rojo para errores */
   font-size: 0.875rem;
-  margin-top: 0.25rem;
+  margin-top: -8px;
+  margin-bottom: 8px;
 }
 
-.success {
-  color: #22c55e;
+.successText {
+  color: #1e8e3e; /* Verde para éxito */
   font-size: 0.875rem;
-  margin-top: 0.5rem;
+  margin-bottom: 12px;
   text-align: center;
 }
 

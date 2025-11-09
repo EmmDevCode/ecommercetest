@@ -1,8 +1,7 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
-// ⚠️ ELIMINA esta línea - ya no necesitas cookies
-// import { cookies } from "next/headers";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 
@@ -31,10 +30,6 @@ export async function register(
   prevState: AuthFormState,
   formData: FormData
 ): Promise<AuthFormState> {
-  // ⚠️ ELIMINA esta línea
-  // const cookieStore = cookies();
-  
-  // ⚠️ ACTUALIZA: usa await con createClient()
   const supabase = await createClient();
 
   const validatedFields = registerSchema.safeParse({
@@ -80,7 +75,12 @@ export async function register(
   }
 
   // Si la confirmación de email está desactivada, redirige
-  redirect("/");
+  revalidatePath("/", "layout"); 
+  return {
+    success: true,
+    message: "¡Registro exitoso! Iniciando sesión...",
+  };
+  // ⛔️ ELIMINAR: redirect("/");
 }
 
 // --- ACCIÓN DE LOGIN ---
@@ -88,10 +88,6 @@ export async function login(
   prevState: AuthFormState,
   formData: FormData
 ): Promise<AuthFormState> {
-  // ⚠️ ELIMINA esta línea
-  // const cookieStore = cookies();
-  
-  // ⚠️ ACTUALIZA: usa await con createClient()
   const supabase = await createClient();
 
   const validatedFields = loginSchema.safeParse({
@@ -121,8 +117,14 @@ export async function login(
     };
   }
 
-  // ¡Éxito! Redirige a la página principal
-  redirect("/");
+  // 3. --- CAMBIO EN LOGIN ---
+  // ¡Éxito! Revalida el layout (para el header) y devuelve un mensaje.
+  revalidatePath("/", "layout");
+  return {
+    success: true,
+    message: "¡Sesión iniciada correctamente!",
+  };
+  // ⛔️ ELIMINAR: redirect("/");
 }
 
 // --- ACCIÓN DE CERRAR SESIÓN ---
