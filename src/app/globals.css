@@ -3,14 +3,14 @@
  * Tu archivo principal de CSS puro.
 */
 
-/* En styles/globals.css o similar */
-
-
 /* 1. Variables CSS (La mejor práctica para los colores) */
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  /* 1. CAMBIO: Color de texto por defecto será BLANCO */
+  --foreground-rgb: 255, 255, 255;
+  
+  /* 2. CAMBIO: Fondo por defecto será NEGRO */
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
   
   /* Colores de tu marca (ejemplo) */
   --primary-color: #0070f3;
@@ -26,25 +26,31 @@
 }
 
 html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
+
 
 /* 4. Estilos globales del Body */
 body {
+  /* 3. CAMBIO: Aplicamos el texto blanco */
   color: rgb(var(--foreground-rgb));
+  
+  /* 4. CAMBIO: Aplicamos el fondo negro */
   background: linear-gradient(
       to bottom,
       transparent,
-      rgb(255, 255, 255)  /* ← Fuerza blanco */
+      rgb(var(--background-end-rgb))
     )
-    rgb(255, 255, 255);    /* ← Fuerza blanco */
+    rgb(var(--background-start-rgb));
   
-  /* Anula el modo oscuro del sistema */
+  /* Mantenemos esto para inputs, etc. */
   color-scheme: light only;
 }
-
+main {
+  /* * Esta línea empuja hacia abajo todo el contenido 
+   * para dejar espacio al header. 
+   * Ajusta 100px si tu header es más alto o más bajo.
+   */
+  padding-top: 50px;
+}
 a {
   color: inherit;
   text-decoration: none;

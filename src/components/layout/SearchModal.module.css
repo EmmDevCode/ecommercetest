@@ -1,0 +1,80 @@
+/* src/components/layout/SearchModal.module.css */
+.overlay {
+  position: fixed;
+  inset: 0;
+  
+  /* 1. CAMBIO CLAVE: 
+     Un fondo gris claro semi-transparente, 
+     como en tu maqueta.
+  */
+  background: rgba(240, 240, 240, 0.5); 
+  
+  /* 2. LA MAGIA: 
+     Esto difumina ("degrada") todo lo que está detrás
+  */
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+}
+
+.modalBody {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: min(450px, 90vw); /* 450px en desktop, 90% en móvil */
+  
+  /* 3. El panel es blanco sólido */
+  background: #ffffff;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* 4. La barra de búsqueda (idéntica a la maqueta) */
+.searchBarWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  
+  /* --- CAMBIOS AQUÍ --- */
+  background-color: #ffffff; /* 1. Cambiado de gris a blanco */
+  border: 1px solid #ffffff; /* 2. (Recomendado) Añade un borde sutil */
+  /* --- FIN DE CAMBIOS --- */
+
+  border-radius: 8px;
+  flex-shrink: 0; 
+}
+
+.searchIcon {
+  color: #555;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.searchInput {
+  flex: 1; /* Ocupa el espacio restante */
+  font-size: 1rem;
+  font-weight: 500;
+  color: #000000;
+
+  /* --- ESTAS LÍNEAS SON LA RESPUESTA --- */
+  border: none;      /* <-- Sin borde */
+  outline: none;     /* <-- Sin borde azul al hacer clic */
+  background: none;  /* <-- Sin fondo (es transparente) */
+}
+
+.searchInput::placeholder {
+  color: #888;
+  font-weight: 400;
+}
+
+.resultsArea {
+  flex: 1; /* Ocupa el resto del espacio */
+  overflow-y: auto; /* Permite scroll si los resultados son muchos */
+  color: #333;
+}

@@ -1,0 +1,71 @@
+.accordionButton {
+  width: 100%;
+  padding: 1.5rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  
+  /* Mantener fondo blanco */
+  background: #ffffff; 
+  
+  /* Estilo Neumorfismo (Claro) */
+  box-shadow: 6px 6px 12px #d4d4d4,
+              -6px -6px 12px #ffffff;
+  
+  transition: box-shadow 0.2s ease-out;
+
+  /* Estilos del texto y layout */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+}
+
+/* Efecto "presionado" (Neumorfismo Inverso) */
+.accordionButton[data-active="true"] {
+  box-shadow: inset 6px 6px 12px #d4d4d4,
+              inset -6px -6px 12px #ffffff;
+}
+.accordionButton:active {
+  box-shadow: inset 6px 6px 12px #d4d4d4,
+              inset -6px -6px 12px #ffffff;
+}
+
+.title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin-right: 0.75rem;
+}
+
+/* Solo el contorno negro - sin relleno */
+.icon svg {
+  color: #000000 !important;
+  fill: none !important;        /* Sin relleno */
+  stroke: #000000 !important;   /* Solo contorno negro */
+  stroke-width: 2px !important; /* Grosor del contorno */
+}
+
+.plus {
+  font-size: 1.75rem;
+  font-weight: 300;
+  color: #888;
+}
+
+.accordionContent {
+  padding: 0 1.5rem 1.5rem 1.5rem;
+  color: #555;
+  line-height: 1.6;
+  overflow: hidden;
+}

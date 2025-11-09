@@ -6,8 +6,24 @@ import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Toaster } from 'sonner';
+import localFont from "next/font/local"; 
 
-const inter = Inter({ subsets: ["latin"] });
+// 2. Configura la familia de fuentes con TUS archivos
+const interDisplay = localFont({
+  src: [
+    {
+      path: './fonts/InterDisplay-Regular.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: './fonts/InterDisplay-Bold.woff2',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
+  display: 'swap', // Muestra una fuente de sistema mientras carga la tuya
+});
 
 export const metadata: Metadata = {
   title: "Mi E-Commerce con Next.js",
@@ -21,7 +37,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body className={inter.className}>
+      <body className={interDisplay.className}>
         
         {/* --- 2. Añade el Header aquí --- */}
         <Header />
@@ -29,7 +45,7 @@ export default function RootLayout({
         {/* Añadimos un 'main' con un estilo mínimo 
           para empujar el footer hacia abajo.
         */}
-        <main className="container" style={{ minHeight: 'calc(100vh - 150px)' }}>
+        <main>
           {/* '150px' es un cálculo apróximado de header + footer */}
           {children}
         </main>

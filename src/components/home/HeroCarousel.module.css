@@ -2,69 +2,80 @@
 .carouselContainer {
   position: relative;
   width: 100%;
-  height: 400px; /* O puedes usar min-height: 400px; */
+  height: 400px;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  /* Quita cualquier background-color aquí */
 }
 
 .slide {
   position: absolute;
-  /* El slide activo ocupa el 70% del contenedor */
   width: 70%; 
   height: 90%;
   border-radius: 12px;
   
-  /* Contenido centrado */
+  /* --- 1. CAMBIO: Efecto Vidrio Esmerilado (Glassmorphism) --- */
+  /* Fondo de vidrio semi-transparente */
+  background-color: rgba(255, 255, 255, 0.1) !important; 
+  /* Efecto blur */
+  backdrop-filter: blur(10px);
+  /* Borde blanco sutil */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  /* Sombra suave */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+
+  /* Contenido centrado (para la imagen) */
   display: flex;
   align-items: center;
   justify-content: center;
-  
-  /* Tu estilo Neumorfismo (modo claro).
-    ¡Ajusta estos colores a los de tu tema! 
-  */
-  background-color: #e0e5ec; /* Color base claro */
-  box-shadow: 9px 9px 16px #a3b1c6, -9px -9px 16px #ffffff;
+  overflow: hidden; /* Para redondear la imagen de adentro */
 }
 
-
-
-.slide h2 {
-  font-size: 2.5rem;
-  color: white;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+/* * Estilo para la imagen placeholder dentro 
+ * del slide de vidrio.
+*/
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Hacemos la imagen placeholder un poco transparente */
+  opacity: 0.5;
 }
+
 
 /* --- Ghost Slides (Prev/Next) --- */
 .ghost {
-  z-index: 1; /* Detrás del slide activo */
+  z-index: 1; 
   cursor: pointer;
-  /* Los ghosts no tienen sombra */
   box-shadow: none; 
+  
+  /* --- 2. CAMBIO: Fondo sólido gris (como la maqueta) --- */
+  background-color: #e0e5ec !important; /* Color del placeholder */
+  backdrop-filter: none; /* Sin efecto vidrio */
+  border: none;
+  overflow: hidden;
 }
 
-.prev {
-  /* Posicionado a la izquierda del contenedor */
-  left: 0;
-  /* 'animate={{ x: '-70%' }}' lo mueve a su lugar */
+/* * Estilo para la imagen placeholder dentro 
+ * de los slides "ghost".
+*/
+.ghost img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.7; /* Un poco más visible */
 }
 
-.next {
-  /* Posicionado a la derecha del contenedor */
-  right: 0;
-  /* 'animate={{ x: '70%' }}' lo mueve a su lugar */
-}
 
-/* --- Slide Activo --- */
 .slide:not(.ghost) {
-  z-index: 2; /* Encima de los ghosts */
+  z-index: 2; 
   cursor: grab;
 }
 .slide:not(.ghost):active {
   cursor: grabbing;
 }
+
 
 /* --- Puntos de Navegación (Tu diseño) --- */
 .dots {
@@ -73,7 +84,7 @@
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 8px; /* Espacio entre cada punto */
+  gap: 8px;
   z-index: 3;
   background-color: rgba(0, 0, 0, 0.1);
   padding: 8px;
@@ -81,7 +92,6 @@
 }
 
 .dotContainer {
-  /* Contenedor del tamaño de la píldora activa */
   width: 30px; 
   height: 12px;
   background: none;
@@ -102,7 +112,6 @@
 }
 
 .activePill {
-  /* La píldora que se anima con layoutId */
   width: 30px;
   height: 12px;
   border-radius: 6px;
@@ -112,7 +121,7 @@
 
 .slideActions {
   position: absolute;
-  bottom: 70px; /* Justo encima de los puntos */
+  bottom: 70px; 
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -125,13 +134,13 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 1rem;
-  border-radius: 99px; /* Forma de píldora */
+  border-radius: 99px; 
   font-size: 0.875rem;
   font-weight: 600;
   text-decoration: none;
   backdrop-filter: blur(10px);
   transition: all 0.2s ease;
-  border: 1px solid transparent; /* Borde sutil */
+  border: 1px solid transparent; 
 }
 
 .actionButton .icon {
@@ -165,28 +174,24 @@
 /* --- Responsive (Móvil) --- */
 @media (max-width: 768px) {
   .carouselContainer {
-    /* En móvil, quitamos el overflow
-       para que la sombra del Neumorfismo se vea bien */
     overflow: visible;
   }
   
   .slide {
-    width: 90%; /* El slide activo ocupa casi todo */
+    width: 90%; 
     height: 85%;
   }
   
   .ghost {
-     /* En móvil, ocultamos los ghosts */
      display: none;
   }
   
   .slide:not(.ghost) {
-     /* El slide activo ya no es 'absolute' */
      position: relative;
   }
 
   .slideActions {
-    bottom: 60px; /* Sube los botones */
+    bottom: 60px;
     gap: 0.5rem;
   }
 
@@ -196,6 +201,6 @@
   }
 
   .dots {
-    bottom: 20px; /* Mantiene su posición original */
+    bottom: 20px;
   }
 }

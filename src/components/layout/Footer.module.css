@@ -1,15 +1,111 @@
+/* src/components/layout/Footer.module.css */
+
 .footer {
   width: 100%;
-  padding: 2rem 0;
-  margin-top: 4rem; /* Empuja el footer lejos del contenido */
-  background-color: var(--secondary-color);
-  border-top: 1px solid #ddd;
-  text-align: center;
-  font-size: 0.875rem;
+  padding: 4rem 0 2rem 0; /* Más padding arriba, menos abajo */
+  margin-top: 4rem; /* Mantenemos la separación */
   
-  
+  /* 1. CAMBIO: Fondo negro y texto blanco (heredado) */
+  background-color: #000000;
+  color: #ffffff;
 }
 
-.footer p {
+/* 2. NUEVO: Contenedor interno centrado */
+.footerContainer {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* 3. NUEVO: Grid para las columnas */
+.footerGrid {
+  display: grid;
+  /* 4 columnas en desktop, 2 en tablet, 1 en móvil */
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+/* 4. NUEVO: Estilo de cada columna */
+.footerColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem; /* Espacio entre links */
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.description {
+  font-size: 0.875rem;
+  color: #888; /* Gris para el texto secundario */
+  line-height: 1.5;
+  max-width: 250px;
+}
+
+.columnTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  color: #fff;
+}
+
+.footerLink {
+  color: #888; /* Links en gris */
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footerLink:hover {
+  color: #fff; /* Links blancos al hacer hover */
+}
+
+/* 5. NUEVO: Lista de iconos sociales */
+.socialList {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.socialLink {
+  color: #888;
+  transition: color 0.2s ease;
+}
+
+.socialLink:hover {
+  color: #fff;
+}
+
+/* 6. NUEVO: Barra inferior para copyright */
+.footerBottom {
+  text-align: center;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid #222; /* Línea divisoria sutil */
+  font-size: 0.875rem;
+  color: #888;
+}
+
+.footerBottom p {
   margin: 0.25rem 0;
+}
+
+/* --- 7. NUEVO: Responsive --- */
+@media (max-width: 768px) {
+  .footerGrid {
+    /* 2 columnas en tablet/móvil */
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .footerGrid {
+    /* 1 columna en móvil muy pequeño */
+    grid-template-columns: 1fr;
+  }
 }

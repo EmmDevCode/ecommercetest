@@ -34,9 +34,4 @@
   text-decoration: underline;
   font-weight: 600;
 }
-.checkoutButtonWrapper {
-  /* Este div ya existía en tu carrito.module.css, 
-     pero lo movemos aquí para que el botón sea parte del flujo
-  */
-}
 

@@ -1,0 +1,52 @@
+/* src/components/layout/AuthDropdown.module.css */
+
+.dropdownBody {
+  /* 1. Posicionamiento: Anclado al .authWrapper */
+  position: absolute;
+  top: calc(100% + 12px); /* 100% del botón + 12px de espacio */
+  right: 0; /* Alineado a la derecha del ícono */
+  z-index: 1001;
+  
+  /* 2. Estilo (como en tu foto) */
+  display: flex;
+  align-items: center;
+  background: #ffffff; 
+  border-radius: 14px; /* Muy redondeado */
+  padding: 6px; /* Padding pequeño para que los botones se peguen */
+  
+  /* Sombra sutil */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12); 
+  border: 1px solid #eee;
+}
+
+.dropdownLink {
+  padding: 0.5rem 1rem;
+  color: #000;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: 9px;
+  transition: background-color 0.2s;
+  white-space: nowrap; /* Evita que el texto se rompa */
+}
+
+.dropdownLink:hover {
+  background-color: #f0f0f0;
+}
+
+/* 3. Estilo "registrarse" (fondo negro) */
+.dropdownLink:last-child {
+  background-color: #000;
+  color: #fff;
+}
+.dropdownLink:last-child:hover {
+  background-color: #333;
+}
+
+/* 4. La línea vertical */
+.separator {
+  width: 1px;
+  height: 16px;
+  background-color: #e0e0e0;
+  margin: 0 4px; /* Pequeño espacio */
+}

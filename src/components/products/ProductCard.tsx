@@ -45,8 +45,8 @@ export const ProductCard = ({ product }: ProductCardProps) => {
       </div>
       <div className={styles.info}>
         {/* 3. ¡NUEVO! Mostramos la categoría */}
-        <span className={styles.category}>{category}</span>
         <h3 className={styles.name}>{product.name}</h3>
+        <span className={styles.category}>{category}</span>
         <p className={styles.price}>{formattedPrice}</p>
       </div>
     </Link>

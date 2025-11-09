@@ -18,7 +18,8 @@
 
 .imageWrapper {
   width: 100%;
-  aspect-ratio: 4 / 3; 
+  /* 1. CAMBIO: Aspecto más alto (como la maqueta) */
+  aspect-ratio: 4 / 5; 
   background-color: #f0f0f0;
 }
 
@@ -35,40 +36,26 @@
   flex-direction: column;
 }
 
-/* --- ¡NUEVO! Estilo para la categoría --- */
+/* 2. CAMBIO: Estilo de la Categoría (como "producto" en rojo en tu maqueta) */
 .category {
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: #777;
+  font-size: 0.875rem;
+  font-weight: 700; /* Más grueso */
+  color: var(--primary-color); /* Color primario */
   text-transform: uppercase;
   margin-bottom: 0.25rem;
 }
 
+/* 3. CAMBIO: Estilo del Nombre (como "categoria" en negro en tu maqueta) */
 .name {
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 500; /* Más delgado */
   margin-bottom: 0.5rem;
   flex-grow: 1; /* Esto empuja el precio hacia abajo */
 }
 
+/* 4. CAMBIO: Estilo del Precio (como "precio" en negro en tu maqueta) */
 .price {
   font-size: 1.125rem;
-  font-weight: 700;
-  color: var(--primary-color);
+  font-weight: 600;
+  color: #000000; /* Color negro */
 }
-
-/* --- ESTILOS ANTIGUOS (Limpieza) --- */
-/* Ya no necesitamos un wrapper de link ni de botón */
-.linkWrapper {
-  /* ... (puedes borrar esto si ya no lo usas) ... */
-}
-.buttonWrapper {
-  padding: 0;
-}
-.info {
-  padding: 1rem;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-}
-

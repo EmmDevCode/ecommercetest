@@ -2,7 +2,8 @@ import styles from './Button.module.css';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
-  variant?: 'primary' | 'secondary';
+  // 1. CAMBIO: Añadimos 'dark' a las opciones de variante
+  variant?: 'primary' | 'secondary' | 'dark';
 }
 
 /**

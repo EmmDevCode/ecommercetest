@@ -1,0 +1,94 @@
+/* src/components/layout/MobileMenu.module.css */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(240, 240, 240, 0.5); 
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+}
+
+.modalBody {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: min(350px, 85vw); /* Más angosto que el search */
+  background: #ffffff;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header del panel */
+.menuHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1rem;
+}
+
+.menuLogo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #000;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  color: #333;
+  cursor: pointer;
+  padding: 0.25rem;
+}
+.closeButton svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Contenedor de links */
+.nav {
+  flex: 1; /* Ocupa el resto del espacio */
+  overflow-y: auto;
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.navSectionTitle {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+.navSectionTitle:first-child {
+  margin-top: 0.5rem;
+}
+
+.navLink, .navLinkIndent {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #222;
+  text-decoration: none;
+  padding: 0.75rem 0.5rem;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+.navLink:hover {
+  background-color: #f0f0f0;
+}
+
+.navLinkIndent {
+  padding-left: 1.5rem;
+  font-size: 1rem;
+  color: #333;
+}
+.navLinkIndent:hover {
+  background-color: #f0f0f0;
+}

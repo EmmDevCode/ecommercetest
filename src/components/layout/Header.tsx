@@ -2,12 +2,13 @@
 import Link from 'next/link';
 import styles from './Header.module.css';
 import { createClient } from '@/lib/supabase/server';
-import { SignOutButton } from '@/components/auth/SignOutButton';
-import { NavDropdown } from './NavDropdown'; // <-- Importa el nuevo componente
+import { NavDropdown } from './NavDropdown';
+import { HeaderActions } from './HeaderActions';
+import { MobileNav } from './MobileNav';
 
 /**
  * El Header principal del sitio.
- * ¡Ahora es un Server Component!
+ * ¡Sigue siendo un Server Component!
  */
 export const Header = async () => {
   const supabase = await createClient();
@@ -34,12 +35,10 @@ export const Header = async () => {
 
   return (
     <header className={styles.header}>
-      {/* 4. Este es el 'wrapper' que tendrá el estilo Glassmorfismo */}
-      <div className={`${styles.wrapper} container`}>
-        
-        {/* --- NAVEGACIÓN (Izquierda) --- */}
+      {/* --- 1. NAVEGACIÓN DE ESCRITORIO --- */}
+      {/* Esta es la barra que se OCULTARÁ en móvil */}
+      <div className={`${styles.wrapper} ${styles.desktopNav} container`}>
         <nav className={styles.nav}>
-          {/* 5. Reemplazamos el Link por el Dropdown */}
           <NavDropdown title="productos" categories={categories || []} />
           <Link href="/reseñas" className={styles.navLink}>
             Reseñas
@@ -48,58 +47,24 @@ export const Header = async () => {
             Sobre nosotros
           </Link>
         </nav>
-
         {/* --- LOGO (Centro) --- */}
         <Link href="/" className={styles.logo}>
           LOGO
         </Link>
 
-        {/* --- ACCIONES (Derecha) --- */}
-        <div className={styles.actions}>
-          
-          {/* Icono de Búsqueda (TODO: Implementar modal) */}
-          <button className={styles.iconButton} title="Buscar">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="11" cy="11" r="8"></circle>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
-          </button>
-          
-          {/* Icono de Carrito */}
-          <Link href="/carrito" className={styles.iconButton} title="Carrito">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-              <line x1="3" y1="6" x2="21" y2="6"></line>
-              <path d="M16 10a4 4 0 0 1-8 0"></path>
-            </svg>
-          </Link>
-          
-          {/* 6. Lógica condicional para Login/Cuenta */}
-          {user ? (
-            <>
-              {/* Enlace a "Mi Cuenta" o "Admin" */}
-              <Link 
-                href={userRole === 'admin' ? '/admin' : '/mi-cuenta'} 
-                className={styles.iconButton} 
-                title={userRole === 'admin' ? 'Panel de Admin' : 'Mi Cuenta'}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                  <circle cx="12" cy="7" r="4"></circle>
-                </svg>
-              </Link>
-              {/* Botón de Salir (ahora solo ícono) */}
-              <SignOutButton />
-            </>
-          ) : (
-            // Si no está logueado, mostrar enlaces de texto
-            <>
-              <Link href="/login" className={styles.navLink}>Login</Link>
-            </>
-          )}
-        </div>
-
+        {/* --- 6. REEMPLAZO --- */}
+        {/* Reemplazamos todo el <div> de acciones por
+            nuestro nuevo componente cliente, pasándole
+            los datos que cargamos en el servidor. */}
+        <HeaderActions user={user} userRole={userRole} />
       </div>
+      {/* --- 2. NAVEGACIÓN MÓVIL --- */}
+      {/* Este componente solo será VISIBLE en móvil */}
+      <MobileNav 
+        user={user}
+        userRole={userRole}
+        categories={categories || []}
+      />
     </header>
   );
 };
