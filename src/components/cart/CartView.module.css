@@ -1,63 +1,170 @@
-.item {
+/* src/components/cart/CartView.module.css */
+
+/* 1. El Grid (movido de carrito.module.css) */
+.layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* 2/3 para la lista, 1/3 para el resumen */
+  gap: 2rem;
+}
+
+/* 2. La Columna de Resumen (movido de carrito.module.css) */
+.summary {
+  /* ¡Estilo minimalista! */
+  background-color: #ffffff;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  padding: 1.5rem;
+  height: fit-content; /* Para que no se estire */
+  position: sticky;
+  top: 120px; /* (100px padding-top de main + 20px) */
+}
+
+.summary h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.summaryRow {
   display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+}
+.summaryRow span:last-child {
+  font-weight: 500;
+}
+
+.divider {
+  height: 1px;
+  background-color: #f0f0f0;
+  margin: 1.5rem 0;
+}
+
+.summaryTotal {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+/* 3. La Columna de Lista de Items */
+.itemsList {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 4. El Item Individual (¡Rediseñado!) */
+.item {
+  display: grid;
+  /* (Imagen) (Info) (Total) (Quitar) */
+  grid-template-columns: 100px 1fr auto auto;
   gap: 1.5rem;
-  padding: 1.5rem 0;
-  border-bottom: 1px solid var(--secondary-color);
+  align-items: center; /* Centra verticalmente */
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.item:last-child {
+  border-bottom: none;
 }
 
 .imageWrapper {
-  flex-shrink: 0; /* Evita que la imagen se encoja */
+  flex-shrink: 0;
 }
-
 .image {
   width: 100px;
   height: 100px;
   object-fit: cover;
   border-radius: 8px;
-  border: 1px solid var(--secondary-color);
+  border: 1px solid #f0f0f0;
 }
 
 .itemInfo {
-  flex-grow: 1; /* Ocupa el espacio disponible */
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .name {
   font-size: 1.125rem;
   font-weight: 600;
-  margin-bottom: 0.25rem;
+  color: #000;
+  text-decoration: none;
+}
+.name:hover {
+  text-decoration: underline;
 }
 
 .price {
   font-size: 1rem;
-  margin-bottom: 0.75rem; /* O dale un poco más de espacio */
+  color: #555;
+  margin-bottom: 0.5rem; /* Espacio para QuantitySelector */
 }
 
-.quantity {
-  font-size: 0.875rem;
-  color: #555;
+.itemTotal {
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-align: right;
+  min-width: 80px; /* Evita que el precio salte */
 }
 
 .itemActions {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .removeButton {
   background: none;
   border: none;
-  color: #d93025;
-  font-size: 0.875rem;
+  color: #888;
   cursor: pointer;
-  text-decoration: underline;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: background-color 0.2s, color 0.2s;
+}
+.removeButton:hover {
+  background-color: #f5f5f5;
+  color: #000;
 }
 
-.removeButton:disabled {
-  color: #999;
-}
 
-.options {
-  font-size: 0.875rem;
-  color: #555;
-  margin-bottom: 0.5rem;
+/* --- Responsive para Móvil --- */
+@media (max-width: 768px) {
+  .layout {
+    grid-template-columns: 1fr; /* Una sola columna */
+  }
+  .summary {
+    position: static; /* Ya no es pegajoso */
+  }
+  .item {
+    /* Reorganizamos el grid para móvil */
+    grid-template-columns: 80px 1fr auto;
+    gap: 0.5rem 1rem;
+  }
+  .imageWrapper {
+    grid-row: 1 / 3;
+  }
+  .image {
+    width: 80px;
+    height: 80px;
+  }
+  .itemInfo {
+    grid-column: 2;
+    grid-row: 1 / 3;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  .itemTotal {
+    grid-column: 3;
+    grid-row: 1;
+  }
+  .itemActions {
+    grid-column: 3;
+    grid-row: 2;
+    align-items: flex-end;
+  }
 }
-

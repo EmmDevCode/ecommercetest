@@ -1,82 +1,183 @@
-.form {
-  max-width: 500px;
-  margin: 2rem auto;
-  padding: 2rem;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
+/* src/components/auth/AuthForm.module.css */
+
+.authGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100%;
 }
 
-.formGroup {
-  margin-bottom: 1.25rem;
+.welcomeSection {
+  background-color: #f8f8f8;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  text-align: center;
+  border-radius: 16px 0 0 16px;
 }
 
-.formGroup label {
-  margin-bottom: 0.5rem;
-  font-weight: 600;
+.welcomeSection h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
   color: #333;
 }
 
-.formGroup input {
-  padding: 0.75rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+.welcomeSection p {
   font-size: 1rem;
-  background-color: #fff;
-  color: #111;
+  color: #666;
 }
 
-.formGroup input:focus {
-  outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.2);
+.link {
+  color: #000;
+  text-decoration: underline;
+  font-weight: 600;
 }
 
-.submitButton {
+.formSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2.5rem;
+  background-color: #ffffff;
+  border-radius: 0 16px 16px 0;
+  overflow-y: auto; /* Scroll si el form es muy largo */
+}
+
+.formSection h3 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #888;
+  margin-bottom: -0.5rem;
+}
+
+.input {
   width: 100%;
-  padding: 0.75rem 1.5rem;
+  padding: 0.8rem 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #333;
+  transition: border-color 0.2s;
+}
+.input:focus {
+  outline: none;
+  border-color: #000;
+}
+
+.checkboxContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.checkboxContainer input[type="checkbox"] {
+  accent-color: #000;
+}
+.checkboxContainer label {
+  font-size: 0.9rem;
+  color: #555;
+  font-weight: 400;
+  margin-bottom: 0;
+}
+
+.primaryButton {
+  background-color: #000;
+  color: #fff;
+  padding: 0.9rem 1.5rem;
   border: none;
-  border-radius: 4px;
-  background-color: var(--primary-color);
-  color: white;
+  border-radius: 8px;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s;
+}
+.primaryButton:hover {
+  background-color: #333;
 }
 
-.submitButton:hover {
-  filter: brightness(0.9);
+.forgotPassword {
+  text-align: right;
+  font-size: 0.85rem;
+  color: #555;
+  text-decoration: none;
+  margin-top: -0.5rem;
+}
+.forgotPassword:hover {
+  text-decoration: underline;
 }
 
-.submitButton:disabled {
-  background-color: #ccc;
+.socialLogin {
+  margin-top: 2rem;
+  text-align: center;
+}
+.socialLogin p {
+  font-size: 0.9rem;
+  color: #888;
+  margin-bottom: 1rem;
+}
+
+.socialButtons {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+}
+.socialButton {
+  background-color: #f0f0f0;
+  color: #333;
+  padding: 0.7rem 1.2rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.error {
+  color: #ef4444;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.success {
+  color: #22c55e;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+.primaryButton:disabled {
+  opacity: 0.6;
   cursor: not-allowed;
 }
 
-.errorText {
-  margin-top: 0.25rem;
-  color: #d93025;
-  font-size: 0.875rem;
+/* Responsive (el mismo de AuthLayout.module.css) */
+@media (max-width: 768px) {
+  .authGrid {
+    grid-template-columns: 1fr;
+  }
+  .welcomeSection, .formSection {
+    border-radius: 0;
+  }
+  /* Ocultamos la bienvenida en móvil para simplicidad */
+  .welcomeSection {
+    display: none; 
+  }
+  .formSection {
+    border-radius: 16px; /* Redondeamos todo el form */
+  }
 }
-
-.messageError {
-  padding: 1rem;
-  background-color: #ffebee;
-  color: #d93025;
-  border: 1px solid #d93025;
-  border-radius: 4px;
-  margin-bottom: 1rem;
-}
-
-.messageSuccess {
-  padding: 1rem;
-  background-color: #e6f7ea;
-  color: #1e8e3e;
-  border: 1px solid #1e8e3e;
-  border-radius: 4px;
-  margin-bottom: 1rem;
-}
-

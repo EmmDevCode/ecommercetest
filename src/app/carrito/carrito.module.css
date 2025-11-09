@@ -1,79 +1,42 @@
 .page {
-  max-width: 1200px;
-  margin: 2rem auto;
-  padding: 0 1rem;
+  /* 1. Fondo blanco para TODO el viewport */
+  background-color: #ffffff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  
+  
+  /* 2. Texto negro */
+  color: #000;
+  
+  /* 3. Espaciado y scroll */
+  padding: 2rem 0;
+  min-height: 100vh;
+  overflow-y: auto;
 }
 
 .page h1 {
   font-size: 2.5rem;
   margin-bottom: 2rem;
+  padding: 0 1rem;
+  padding-top: 50px;
 }
 
+/* Mantén el resto de tus estilos... */
 .empty {
   text-align: center;
-  padding: 4rem 0;
+  padding: 4rem 1rem;
+  border: 1px dashed #e0e0e0;
+  border-radius: 12px;
 }
-
 .empty p {
   font-size: 1.25rem;
   margin-bottom: 1rem;
 }
-
 .empty a {
-  color: var(--primary-color);
+  color: #000;
   text-decoration: underline;
+  font-weight: 500;
 }
-
-.layout {
-  display: grid;
-  grid-template-columns: 2fr 1fr; /* 2/3 para la lista, 1/3 para el resumen */
-  gap: 2rem;
-}
-
-.itemsList {
-  /* La lista de items (CartView) */
-}
-
-.summary {
-  background-color: var(--background-end-rgb);
-  border: 1px solid var(--secondary-color);
-  border-radius: 8px;
-  padding: 1.5rem;
-  height: fit-content; /* Para que no se estire */
-}
-
-.summary h2 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  border-bottom: 1px solid var(--secondary-color);
-  padding-bottom: 0.5rem;
-}
-
-.summaryRow, .summaryTotal {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 0.75rem;
-  font-size: 1rem;
-}
-
-.summaryTotal {
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin-top: 1rem;
-  border-top: 1px solid var(--secondary-color);
-  padding-top: 1rem;
-}
-
-.checkoutButton {
-  width: 100%;
-  padding: 0.75rem;
-  margin-top: 1rem;
-  font-size: 1rem;
-  font-weight: 600;
-  color: white;
-  background-color: var(--primary-color);
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-

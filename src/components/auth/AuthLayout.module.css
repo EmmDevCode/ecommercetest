@@ -1,0 +1,37 @@
+/* src/components/auth/AuthLayout.module.css */
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)); /* Fondo degradado */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Asegúrate de que esté por encima de todo */
+  padding: 1rem;
+}
+
+.modalContent {
+  background: #ffffff; /* Fondo blanco para el modal */
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  max-width: 900px; /* Ancho máximo, como en tu imagen */
+  width: 100%;
+  height: 600px; /* Alto fijo para el ejemplo */
+  overflow: hidden; /* Para que nada se salga */
+  display: flex; /* Para organizar las dos columnas (Welcome + Login Form) */
+  flex-direction: row; /* Por defecto, las columnas estarán en fila */
+}
+
+/* Responsive para pantallas más pequeñas */
+@media (max-width: 768px) {
+  .modalContent {
+    flex-direction: column; /* Las columnas se apilan en móvil */
+    height: auto; /* El alto se ajusta al contenido */
+    max-height: 90vh; /* Máximo 90% del alto de la ventana */
+    overflow-y: auto; /* Scroll si el contenido es muy largo */
+  }
+}

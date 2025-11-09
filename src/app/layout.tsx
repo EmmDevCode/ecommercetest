@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 
 // --- 1. Importa tus nuevos componentes ---
@@ -30,35 +29,25 @@ export const metadata: Metadata = {
   description: "La mejor tienda para tus compras.",
 };
 
+// 3. ¡EL CAMBIO MÁS IMPORTANTE!
+// Añadimos 'modal' a las props del layout
 export default function RootLayout({
   children,
+  modal,
 }: Readonly<{
   children: React.ReactNode;
+  modal: React.ReactNode;
 }>) {
   return (
     <html lang="es">
       <body className={interDisplay.className}>
+        {/* El modal se renderiza aquí, en el nivel más alto */}
+        {modal}
         
-        {/* --- 2. Añade el Header aquí --- */}
         <Header />
-        
-        {/* Añadimos un 'main' con un estilo mínimo 
-          para empujar el footer hacia abajo.
-        */}
-        <main>
-          {/* '150px' es un cálculo apróximado de header + footer */}
-          {children}
-        </main>
-        
-        {/* --- 3. Añade el Footer aquí --- */}
+        <main>{children}</main>
         <Footer />
-
-        {/* --- 3. Añade el Toaster aquí --- 
-           richColors aplica estilos automáticos para éxito y error.
-           position="bottom-right" lo coloca donde pediste.
-        */}
         <Toaster position="bottom-right" richColors />
-
       </body>
     </html>
   );
