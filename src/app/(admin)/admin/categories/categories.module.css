@@ -1,33 +1,74 @@
-/* src/app/(admin)/admin/categories/categories.module.css */
-.page {
-  max-width: 1000px;
+/* Layout Principal */
+.pageHeader {
+  margin-bottom: 2rem;
 }
-.layout {
+
+.pageTitle {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #111;
+  letter-spacing: -0.025em;
+  margin-bottom: 0.25rem;
+}
+
+.pageSubtitle {
+  color: #6B7280;
+  font-size: 0.9rem;
+}
+
+/* Grid de 2 Columnas */
+.layoutGrid {
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 350px 1fr; /* Columna fija para form, flexible para lista */
   gap: 2rem;
-  margin-top: 1.5rem;
+  align-items: start;
 }
-.listContainer h3,
-.formContainer h3 {
-  font-size: 1.25rem;
+
+@media (max-width: 1024px) {
+  .layoutGrid {
+    grid-template-columns: 1fr; /* En tablets/móviles se pone uno debajo de otro */
+  }
+}
+
+/* Tarjetas (Estilo unificado) */
+.card {
+  background: white;
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  overflow: hidden;
+}
+
+.cardHeader {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #E5E7EB;
+  background-color: #F9FAFB;
+}
+
+.cardTitle {
+  font-size: 0.95rem;
   font-weight: 600;
-  margin-bottom: 1rem;
+  color: #374151;
+  margin: 0;
 }
+
+.cardBody {
+  padding: 1.5rem;
+}
+
+/* Lista */
+.listContainer {
+  padding: 0;
+}
+
 .list {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-}
-.list li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-  background-color: var(--secondary-color);
-  border-radius: 6px;
-}
-.list li small {
-  font-family: monospace;
 }
 
+.emptyState {
+  padding: 3rem;
+  text-align: center;
+  color: #9CA3AF;
+  font-size: 0.9rem;
+}

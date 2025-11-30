@@ -1,49 +1,125 @@
-.page {
-  padding: 2rem;
-}
+/* src/app/(admin)/admin/orders/orders.module.css */
 
-.page h1 {
-  font-size: 2rem;
-  font-weight: 700;
+/* --- Layout Principal --- */
+.pageHeader {
   margin-bottom: 2rem;
 }
 
-.ordersTable {
+.pageTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 0.25rem;
+  letter-spacing: -0.02em;
+}
+
+.pageSubtitle {
+  color: #6B7280;
+  font-size: 0.9rem;
+}
+
+/* --- Tarjeta Contenedora --- */
+.card {
+  background: white;
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  overflow: hidden; /* Para que la tabla no se salga en bordes redondeados */
+}
+
+/* --- Tabla --- */
+.tableContainer {
+  width: 100%;
+  overflow-x: auto; /* Scroll horizontal si la pantalla es muy pequeña */
+}
+
+.table {
   width: 100%;
   border-collapse: collapse;
-}
-
-.ordersTable th,
-.ordersTable td {
-  padding: 1rem;
   text-align: left;
-  border-bottom: 1px solid var(--secondary-color);
 }
 
-.ordersTable th {
-  background-color: var(--secondary-color);
-}
-
-.orderId {
-  font-family: monospace;
-  font-size: 0.875rem;
-}
-
-.status {
-  padding: 0.25rem 0.75rem;
-  border-radius: 99px;
+.table th {
+  background-color: #F9FAFB;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  font-size: 0.875rem;
-  text-transform: capitalize;
+  text-transform: uppercase;
+  color: #6B7280;
+  border-bottom: 1px solid #E5E7EB;
+  white-space: nowrap; /* Evita que los títulos se rompan */
 }
 
-/* Estilos para los estados */
-.status.pending { background-color: #fef3c7; color: #92400e; }
-.status.paid { background-color: #d1fae5; color: #065f46; }
-.status.processing { background-color: #dbeafe; color: #1e40af; }
-.status.shipped { background-color: #e0e7ff; color: #3730a3; }
-.status.in_transit { background-color: #e5e7eb; color: #1f2937; }
-.status.out_for_delivery { background-color: #fef9c3; color: #713f12; }
-.status.delivered { background-color: #c6f6d5; color: #22543d; }
-.status.cancelled { background-color: #fee2e2; color: #991b1b; }
+.table td {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #E5E7EB;
+  color: #374151;
+  font-size: 0.875rem;
+  vertical-align: middle;
+}
 
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.table tr:hover td {
+  background-color: #F9FAFB;
+  transition: background-color 0.2s ease;
+}
+
+/* --- Tipografía Específica --- */
+.fontMedium {
+  font-weight: 500;
+  color: #111;
+  font-family: monospace; /* Para que los IDs se vean alineados */
+  font-size: 0.9rem;
+}
+
+/* --- Badges (Etiquetas de Estado) --- */
+.badge {
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+/* Variantes de color para los badges */
+.badgeSuccess {
+  background-color: #DCFCE7;
+  color: #166534;
+  border: 1px solid #BBF7D0;
+}
+
+.badgeWarning {
+  background-color: #FEF3C7;
+  color: #92400E;
+  border: 1px solid #FDE68A;
+}
+
+.badgeNeutral {
+  background-color: #F3F4F6;
+  color: #374151;
+  border: 1px solid #E5E7EB;
+}
+
+/* --- Acciones (Botones de ícono) --- */
+.actionIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem;
+  border-radius: 6px;
+  color: #6B7280;
+  transition: all 0.2s;
+  background: transparent;
+  border: 1px solid transparent;
+}
+
+.actionIcon:hover {
+  background-color: #F3F4F6;
+  color: #2563EB; /* Azul al hacer hover */
+  border-color: #E5E7EB;
+}

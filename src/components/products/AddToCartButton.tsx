@@ -2,7 +2,7 @@
 "use client";
 
 import { useTransition } from 'react';
-import { addToCart } from '@/app/carrito/actions';
+import { addToCart } from '@/app/(store)/carrito/actions';
 import { Button } from '@/components/ui/Button'; 
 import { toast } from 'sonner';
 

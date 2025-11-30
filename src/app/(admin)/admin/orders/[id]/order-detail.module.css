@@ -1,0 +1,199 @@
+/* Layout Principal */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.headerLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.backButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #6B7280;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.backButton:hover { color: #111; }
+
+.title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #111;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.date {
+  color: #6B7280;
+  font-size: 0.9rem;
+}
+
+.statusWrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: white;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #E5E7EB;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.statusLabel {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+/* Grid Layout */
+.grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* 66% contenido, 33% sidebar */
+  gap: 2rem;
+}
+
+@media (max-width: 1024px) {
+  .grid { grid-template-columns: 1fr; }
+}
+
+/* Cards Generales */
+.card {
+  background: white;
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.cardTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111;
+  margin: 0 0 1.25rem 0;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #F3F4F6;
+}
+
+/* Lista de Productos */
+.itemsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.itemRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px dashed #E5E7EB;
+}
+.itemRow:last-child { border-bottom: none; }
+
+.itemImage {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  border: 1px solid #E5E7EB;
+  overflow: hidden;
+  background: #F9FAFB;
+}
+.img { object-fit: cover; width: 100%; height: 100%; }
+
+.itemInfo { flex: 1; }
+.itemName { display: block; font-weight: 500; color: #111; font-size: 0.95rem; }
+.itemSku { display: block; font-size: 0.8rem; color: #6B7280; margin-top: 2px; text-transform: uppercase; }
+
+.itemMeta { text-align: right; }
+.itemPrice { display: block; font-size: 0.85rem; color: #6B7280; }
+.itemTotal { display: block; font-weight: 600; color: #111; font-size: 1rem; }
+
+/* Totales */
+.totalsSection {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #E5E7EB;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.totalRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95rem;
+  color: #4B5563;
+}
+
+.finalTotal {
+  font-weight: 700;
+  color: #111;
+  font-size: 1.1rem;
+  margin-top: 0.5rem;
+}
+
+/* Sidebar Info */
+.infoRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.avatar {
+  width: 40px; height: 40px;
+  background: #000; color: white;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 600;
+}
+
+.infoName { font-weight: 600; color: #111; margin: 0; }
+.infoSub { font-size: 0.8rem; color: #6B7280; margin: 0; }
+
+.contactRow {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+  color: #4B5563;
+  margin-bottom: 0.5rem;
+}
+.icon { color: #9CA3AF; }
+.link { color: #2563EB; text-decoration: none; }
+.link:hover { text-decoration: underline; }
+
+/* Address */
+.addressBox {
+  display: flex;
+  gap: 0.75rem;
+  background: #F9FAFB;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #F3F4F6;
+}
+.addressText p { margin: 0 0 2px 0; font-size: 0.9rem; color: #374151; }
+.addressIcon { color: #000; margin-top: 2px; }
+
+/* Payment */
+.idRef { font-family: monospace; background: #F3F4F6; padding: 2px 6px; border-radius: 4px; font-size: 0.8rem; }
+
+.errorContainer { text-align: center; padding: 4rem; }

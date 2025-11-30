@@ -1,47 +1,126 @@
-/* src/app/(admin)/admin/attributes/attributes.module.css */
-/* Reutilizamos los estilos de categories.module.css */
-.page {
-  max-width: 1000px;
+/* Layout General */
+.pageHeader {
+  margin-bottom: 2rem;
 }
-.layout {
+
+.pageTitle {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #111;
+  letter-spacing: -0.025em;
+  margin-bottom: 0.25rem;
+}
+
+.pageSubtitle {
+  color: #6B7280;
+  font-size: 0.9rem;
+}
+
+/* Grid de 2 Columnas */
+.layoutGrid {
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 350px 1fr;
   gap: 2rem;
-  margin-top: 1.5rem;
+  align-items: start;
 }
-.listContainer h3,
-.formContainer h3 {
-  font-size: 1.25rem;
+
+@media (max-width: 1024px) {
+  .layoutGrid { grid-template-columns: 1fr; }
+}
+
+/* Tarjetas */
+.card {
+  background: white;
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  overflow: hidden;
+  margin-bottom: 1.5rem; /* Espacio entre tarjetas de atributos */
+}
+
+.cardHeader {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #E5E7EB;
+  background-color: #F9FAFB;
+}
+
+.cardTitle {
+  font-size: 0.95rem;
   font-weight: 600;
-  margin-bottom: 1rem;
+  color: #374151;
+  margin: 0;
 }
-.list {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-/* --- Estilos específicos de Atributos --- */
-.attributeCard {
+
+.cardBody {
   padding: 1.5rem;
-  background-color: var(--secondary-color);
-  border-radius: 8px;
 }
-.attributeCard h4 {
-  font-size: 1.125rem;
+
+/* Estilos Específicos del Item de Atributo */
+.attributeHeader {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #E5E7EB;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+}
+
+.attributeName {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #111;
+  margin: 0;
+}
+
+.optionsSection {
+  margin-bottom: 1.5rem;
+}
+
+.label {
+  display: block;
+  font-size: 0.8rem;
   font-weight: 600;
+  color: #6B7280;
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
+
+/* Badges de Opciones */
 .optionsGrid {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-top: 1rem;
-}
-.optionTag {
-  padding: 0.25rem 0.75rem;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 99px;
-  font-size: 0.875rem;
-  font-weight: 500;
 }
 
+.optionTag {
+  background-color: #F3F4F6;
+  color: #374151;
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: 1px solid #E5E7EB;
+}
+
+.emptyOptions {
+  color: #9CA3AF;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.addOptionWrapper {
+  padding-top: 1rem;
+  border-top: 1px dashed #E5E7EB;
+}
+
+.emptyState {
+  padding: 3rem;
+  text-align: center;
+  color: #9CA3AF;
+}
+
+.attributesStack {
+  display: flex;
+  flex-direction: column;
+}

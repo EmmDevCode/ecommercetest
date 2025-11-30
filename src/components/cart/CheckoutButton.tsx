@@ -1,7 +1,7 @@
 "use client";
 
 import { useTransition } from 'react';
-import { createOrderAndPay } from '@/app/checkout/actions';
+import { createOrderAndPay } from '@/app/(store)/checkout/actions';
 import styles from './CheckoutButton.module.css';
 import { toast } from 'sonner';
 

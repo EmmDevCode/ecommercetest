@@ -1,47 +1,192 @@
 /* src/components/admin/AdminSidebar.module.css */
 .sidebar {
-  width: 250px;
+  width: 260px;
   height: 100vh;
-  background-color: var(--background-end-rgb);
-  border-right: 1px solid var(--secondary-color);
+  background-color: #FFFFFF;
+  border-right: 1px solid #E5E7EB;
   display: flex;
-  flex-direction: column;
-  padding: 1.5rem 1rem;
+  flex-direction: column; /* Esto es vital para que el footer baje */
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1000;
+  z-index: 50;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
 }
 
-.logo {
-  font-size: 1.5rem;
+.collapsed {
+  width: 80px;
+}
+
+/* --- Logo --- */
+.logoContainer {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  padding: 0 1.5rem;
+  gap: 0.75rem;
+  border-bottom: 1px solid #F3F4F6;
+}
+
+.logoIcon {
+  min-width: 32px; /* Evita que se aplaste */
+  height: 32px;
+  background: #000;
+  color: white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+}
+
+.logoText {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #111;
+  white-space: nowrap; /* Evita saltos de línea */
+}
+
+/* --- Contenido --- */
+.scrollableContent {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.groupTitle {
+  font-size: 0.7rem;
   font-weight: 700;
-  margin-bottom: 2rem;
-  padding: 0 0.5rem;
+  color: #9CA3AF;
+  margin-bottom: 0.75rem;
+  padding-left: 0.75rem;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
 }
 
 .navList {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.25rem;
 }
 
+/* --- Links --- */
 .navLink {
-  display: block;
-  padding: 0.75rem 1rem;
-  border-radius: 6px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  color: #4B5563; /* Gris oscuro */
   text-decoration: none;
+  font-size: 0.9rem;
   font-weight: 500;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition: all 0.2s;
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 .navLink:hover {
-  background-color: var(--secondary-color);
+  background-color: #F3F4F6;
+  color: #111;
 }
 
-.navLink.active {
-  background-color: var(--primary-color);
-  color: white;
+.active, .activeParent {
+  background-color: #F3F4F6;
+  color: #000; /* Negro para activo */
+  font-weight: 600;
 }
 
+.linkLabel {
+  flex: 1;
+  text-align: left;
+  white-space: nowrap;
+}
+
+/* --- Submenu --- */
+.subMenu {
+  list-style: none;
+  margin-top: 0.25rem;
+  padding-left: 2.75rem; /* Indentación */
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.subLink {
+  display: block;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.85rem;
+  color: #6B7280;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: color 0.2s;
+}
+
+.subLink:hover {
+  color: #111;
+}
+
+.activeSub {
+  color: #2563EB; /* Azul primario para sub-item activo */
+  font-weight: 600;
+}
+
+/* Colapsado: Centrar iconos */
+.collapsed .navLink {
+  justify-content: center;
+  padding: 0.75rem 0;
+}
+.collapsed .logoContainer {
+  justify-content: center;
+  padding: 0;
+}
+
+/* ESTILOS DEL FOOTER */
+.sidebarFooter {
+  padding: 1rem;
+  border-top: 1px solid #E5E7EB;
+  background-color: #FFFFFF; /* Para tapar el contenido al hacer scroll */
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.footerLink {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  color: #4B5563;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  transition: all 0.2s;
+  width: 100%;
+}
+
+.footerLink:hover {
+  background-color: #F3F4F6;
+  color: #111;
+}
+
+/* Ajustes para modo colapsado */
+.collapsed .sidebarFooter {
+  align-items: center;
+  padding: 1rem 0;
+}
+
+.collapsed .footerLink {
+  justify-content: center;
+  padding: 0.75rem;
+}

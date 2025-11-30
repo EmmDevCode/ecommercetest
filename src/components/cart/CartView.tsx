@@ -2,8 +2,8 @@
 
 import { useTransition } from 'react';
 import Link from 'next/link';
-import { removeItem } from '@/app/carrito/actions';
-import type { CartItemWithProduct, Address } from '@/app/carrito/page';
+import { removeItem } from '@/app/(store)/carrito/actions';
+import type { CartItemWithProduct, Address } from '@/app/(store)/carrito/page';
 import styles from './CartView.module.css';
 import { toast } from 'sonner';
 import { QuantitySelector } from './QuantitySelector';

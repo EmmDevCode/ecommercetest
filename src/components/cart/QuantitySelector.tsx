@@ -1,7 +1,7 @@
 "use client";
 
 import { useTransition } from 'react';
-import { updateQuantity } from '@/app/carrito/actions';
+import { updateQuantity } from '@/app/(store)/carrito/actions';
 import styles from './QuantitySelector.module.css';
 import { toast } from 'sonner';
 

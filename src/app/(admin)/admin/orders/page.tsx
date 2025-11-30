@@ -1,20 +1,16 @@
 import { createClient } from '@/lib/supabase/server';
+import { Eye } from 'lucide-react';
 import Link from 'next/link';
-import styles from './orders.module.css';
 import { StatusSelector } from '@/components/admin/StatusSelector';
+import styles from './orders.module.css';
 
-// --- DEFINICIÓN DE TIPOS ---
+// --- 1. TIPOS ---
 type Order = {
   id: string;
   created_at: string;
   total_amount: number;
   status: string;
   user_id: string;
-};
-
-type Profile = {
-  id: string;
-  full_name: string | null;
 };
 
 type OrderWithCustomer = Order & {
@@ -26,18 +22,15 @@ type OrdersResponse = {
   error: string | null;
 };
 
-// Esta función obtiene los pedidos del servidor
+// --- 2. LÓGICA DE DATOS ---
 async function getOrders(): Promise<OrdersResponse> {
   const supabase = await createClient();
 
-  // 1. Verificamos que el usuario sea 'admin'
+  // Verificamos autenticación
   const { data: { user } } = await supabase.auth.getUser();
-  
-  if (!user) {
-    return { orders: [], error: 'No autenticado.' };
-  }
+  if (!user) return { orders: [], error: 'No autenticado.' };
 
-  // Verificar rol de admin
+  // Verificamos rol
   const { data: profile } = await supabase
     .from('profiles')
     .select('role')
@@ -45,17 +38,14 @@ async function getOrders(): Promise<OrdersResponse> {
     .single();
 
   if (profile?.role !== 'admin') {
-    return { 
-      orders: [], 
-      error: 'Acción no autorizada. Debes ser administrador.' 
-    };
+    return { orders: [], error: 'Acción no autorizada.' };
   }
 
-  // 2. Obtenemos los pedidos
+  // Obtenemos pedidos
   const { data: ordersData, error: ordersError } = await supabase
     .from('orders')
     .select('*')
-    .order('created_at', { ascending: false }); 
+    .order('created_at', { ascending: false });
 
   if (ordersError) {
     console.error("Error al obtener pedidos:", ordersError);
@@ -66,7 +56,7 @@ async function getOrders(): Promise<OrdersResponse> {
     return { orders: [], error: null };
   }
 
-  // 3. Obtenemos los perfiles de los usuarios
+  // Obtenemos nombres de clientes
   const userIds = [...new Set(ordersData.map(order => order.user_id).filter(Boolean))];
   
   const { data: profilesData } = await supabase
@@ -74,84 +64,106 @@ async function getOrders(): Promise<OrdersResponse> {
     .select('id, full_name')
     .in('id', userIds);
 
-  // Crear un mapa para búsqueda rápida
   const profilesMap = new Map();
   profilesData?.forEach(profile => {
     profilesMap.set(profile.id, profile.full_name);
   });
 
-  // 4. Combinamos los datos
   const orders: OrderWithCustomer[] = ordersData.map(order => ({
     ...order,
-    customer_name: profilesMap.get(order.user_id) || `Usuario ${order.user_id.substring(0, 8)}...`
+    customer_name: profilesMap.get(order.user_id) || `Usuario...`
   }));
 
   return { orders, error: null };
 }
 
-// --- La Página ---
+const formatCurrency = (amount: number) => {
+  return new Intl.NumberFormat('es-MX', {
+    style: 'currency',
+    currency: 'MXN',
+  }).format(amount);
+};
+
+// --- 3. PÁGINA ---
 export default async function AdminOrdersPage() {
   const { orders, error } = await getOrders();
 
   if (error) {
     return (
-      <div className={styles.page}>
-        <h1>Error</h1>
-        <p>{error}</p>
-        <Link href="/admin">Volver al Panel</Link>
+      <div className={styles.pageHeader}>
+        <h1 className={styles.pageTitle}>Error: {error}</h1>
       </div>
     );
   }
 
   return (
-    <div className={styles.page}>
-      <h1>Gestión de Pedidos</h1>
-      
-      {orders.length === 0 ? (
-        <div className={styles.empty}>
-          <p>No hay pedidos registrados.</p>
-          <Link href="/admin">Volver al Panel</Link>
+    <div>
+      <div className={styles.pageHeader}>
+        <div>
+          <h1 className={styles.pageTitle}>Gestión de Pedidos</h1>
+          <p className={styles.pageSubtitle}>Historial completo de ventas.</p>
         </div>
-      ) : (
-        <table className={styles.ordersTable}>
-          <thead>
-            <tr>
-              <th>ID del Pedido</th>
-              <th>Cliente</th>
-              <th>Fecha</th>
-              <th>Total</th>
-              <th>Estado Actual</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {orders.map((order) => (
-              <tr key={order.id}>
-                <td className={styles.orderId}>{order.id.split('-')[0]}...</td>
-                <td>{order.customer_name}</td>
-                <td>{new Date(order.created_at).toLocaleDateString('es-MX')}</td>
-                <td>
-                  {new Intl.NumberFormat('es-MX', {
-                    style: 'currency',
-                    currency: 'MXN',
-                  }).format(order.total_amount)}
-                </td>
-                <td>
-                  <span className={`${styles.status} ${styles[order.status]}`}>
-                    {order.status}
-                  </span>
-                </td>
-                <td>
-  <StatusSelector
-    orderId={order.id}
-    currentStatus={order.status}
-  />
-</td>
+      </div>
+
+      <div className={styles.card}>
+        <div className={styles.tableContainer}>
+          <table className={styles.table}>
+            <thead>
+              {/* CORRECCIÓN: Eliminamos espacios/comentarios entre los <th> */}
+              <tr>
+                <th>ID Pedido</th>
+                <th>Cliente</th>
+                <th>Fecha</th>
+                <th>Total</th>
+                <th>Estado Actual</th>
+                <th style={{ textAlign: 'right' }}>Ver</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+            </thead>
+            <tbody>
+              {orders.length > 0 ? (
+                orders.map((order) => (
+                  <tr key={order.id}>
+                    <td style={{ fontFamily: 'monospace', fontWeight: 500 }}>
+                      #{order.id.slice(0, 8)}...
+                    </td>
+                    <td style={{ fontWeight: 500 }}>
+                      {order.customer_name}
+                    </td>
+                    <td>
+                      {new Date(order.created_at).toLocaleDateString('es-MX', {
+                        day: '2-digit', month: 'short', year: 'numeric'
+                      })}
+                    </td>
+                    <td style={{ fontWeight: 600 }}>
+                      {formatCurrency(order.total_amount)}
+                    </td>
+                    
+                    {/* ✅ AQUÍ ESTÁ EL SELECTOR FUNCIONAL */}
+                    <td>
+                      <StatusSelector
+                        orderId={order.id}
+                        currentStatus={order.status}
+                      />
+                    </td>
+                    
+                    <td style={{ textAlign: 'right' }}>
+                      <Link href={`/admin/orders/${order.id}`} className={styles.actionIcon}>
+                        <Eye size={18} />
+                      </Link>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={6} style={{ textAlign: 'center', padding: '3rem', color: '#9CA3AF' }}>
+                    No hay pedidos registrados.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 }
