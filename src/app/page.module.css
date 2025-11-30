@@ -89,7 +89,7 @@
   background-image: url('/placeholder-image.png');
   background-size: cover;
   background-position: center;
-  background-color: #f0f0f0; /* Color mientras carga la imagen */
+  
   
   
 }
@@ -146,8 +146,6 @@
   background-image: url('/placeholder-image.png');
   background-size: cover;
   background-position: center;
-  background-color: #f0f0f0;
-  border: 1px solid var(--secondary-color);
 }
 
 /* Grid para el Acordeón */
